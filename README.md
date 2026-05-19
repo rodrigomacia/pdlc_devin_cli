@@ -50,15 +50,16 @@ Documentação web: [`docs/index.html`](docs/index.html) · [GitHub Pages](docs/
 # 1. Commit inicial (se ainda não fez)
 git init && git add -A && git status   # confira: config.local.json NÃO deve aparecer
 
-# 2. Crie o repositório em https://github.com/new (público, sem README)
-
-# 3. Conecte e envie (substitua SEU_USUARIO)
-git remote add origin https://github.com/SEU_USUARIO/ciclo-producao-digital.git
-git branch -M main
-git push -u origin main
+# Clone
+git clone https://github.com/rodrigomacia/pdlc_devin_cli.git
+cd pdlc_devin_cli
+./scripts/setup-devin-cli.sh
 ```
 
-Ative **Pages**: Settings → Pages → Source: **GitHub Actions**. O site ficará em `https://SEU_USUARIO.github.io/ciclo-producao-digital/`.
+**Repositório:** [github.com/rodrigomacia/pdlc_devin_cli](https://github.com/rodrigomacia/pdlc_devin_cli)
+
+Ative **Pages**: Settings → Pages → Source: **GitHub Actions**.  
+Site: `https://rodrigomacia.github.io/pdlc_devin_cli/`
 
 ## Uso
 
