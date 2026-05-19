@@ -17,6 +17,9 @@ docs/colmeia/
 docs/AGENTS.md
 docs/_site-meta.json
 
+# Dry run — repositório separado (pdlc_dry_run)
+dry-run-cursor/
+
 # SO / IDE
 .DS_Store
 Thumbs.db
