@@ -64,33 +64,111 @@ Pular a etapa 3 é a principal fonte de desperdício que o PDLC evita.
 
 ---
 
-## Começar em 2 minutos (Head)
+## Instalação (primeira vez)
 
-**Precisa clonar o repositório todo dia? Não.**
+**Clonar o repositório é uma vez só** — não precisa repetir no dia a dia. Depois disso, você só abre o **Devin** na pasta do projeto.
 
-1. Abra o **Devin** na pasta que a TI configurou.
-2. Digite (troque o nome da sua iniciativa):
+| Situação | O que fazer |
+|----------|-------------|
+| **Você vai instalar** (ou é a primeira vez no Mac) | Siga os passos abaixo (~30–60 min) |
+| **A TI já configurou** | Pule para [Uso diário](#uso-diário-head) |
+| **Prefere guia passo a passo** | [GUIA-HEAD.md](GUIA-HEAD.md) · [versão web](https://rodrigomacia.github.io/pdlc_devin_cli/guia-inicio.html) |
 
-   ```
-   /orquestrar-producao conta-digital-q3-2026
-   ```
+### 1. Instalar o Devin CLI
 
-3. Siga o que o assistente sugerir — responda com dados de negócio quando pedir.
+O PDLC roda dentro do [Devin CLI](https://cli.devin.ai) — é o “terminal com IA” onde você digita os comandos do ciclo.
 
-**Guia completo (sem jargão técnico):** [GUIA-HEAD.md](GUIA-HEAD.md) · [versão web](https://rodrigomacia.github.io/pdlc_devin_cli/guia-inicio.html)
+**macOS / Linux** (cole no Terminal):
+
+```bash
+curl -fsSL https://cli.devin.ai/install.sh | bash
+```
+
+Confirme que instalou:
+
+```bash
+devin --version
+```
+
+Mais opções e troubleshooting: [cli.devin.ai](https://cli.devin.ai)
+
+### 2. Baixar o PDLC
+
+Escolha uma pasta no seu Mac (ex.: `Documentos`) e rode:
+
+```bash
+cd ~/Documentos
+git clone https://github.com/rodrigomacia/pdlc_devin_cli.git
+cd pdlc_devin_cli
+```
+
+> Sem `git`? Instale com [git-scm.com](https://git-scm.com/) ou peça à TI para copiar a pasta do repositório para o seu computador.
+
+### 3. Preparar o ambiente (script automático)
+
+Na pasta do projeto:
+
+```bash
+chmod +x scripts/setup-devin-cli.sh
+./scripts/setup-devin-cli.sh
+```
+
+O script:
+
+- valida skills e agentes do ciclo;
+- cria pastas para **suas iniciativas** (`_iniciativas/`, handoffs, grill);
+- gera `.devin/config.local.json` a partir do exemplo.
+
+### 4. Conectar ferramentas da empresa
+
+Edite (com apoio de TI, se precisar) os templates em `colmeia/_config/`:
+
+| Arquivo | Para quê |
+|---------|----------|
+| `okr-plataforma.md` | Metas e OKRs da Plataforma |
+| `discovery-tools.md` | VOC, analytics, personas sintéticas, Figma |
+| `construcao-monorepo.md` | Repositório de código, CI/CD, ambientes |
+
+Opcional: MCP e integrações em `.devin/config.local.json`.
+
+Roteiro técnico completo: [configuração](https://rodrigomacia.github.io/pdlc_devin_cli/configuracao.html)
+
+### 5. Abrir o Devin e iniciar uma iniciativa
+
+Ainda na pasta `pdlc_devin_cli`:
+
+```bash
+devin
+```
+
+Na conversa, digite (troque o nome da sua iniciativa):
+
+```
+/orquestrar-producao conta-digital-q3-2026
+```
+
+O assistente mostra a etapa atual, o próximo passo e o que falta — marcado como `[FORNECER]` quando precisar de um dado seu.
 
 ---
 
-## Preparação única (TI — primeira vez)
+## Uso diário (Head)
 
-Antes do Head usar o ciclo, alguém de **TI ou plataforma** prepara o ambiente (~30–60 min):
+**Precisa clonar de novo? Não.**
 
-1. Instalar [Devin CLI](https://cli.devin.ai)
-2. Baixar este repositório
-3. Rodar `./scripts/setup-devin-cli.sh`
-4. Conectar Plataforma OKR, VOC, analytics e pipeline (templates em `colmeia/_config/`)
+1. Abra o **Devin** na pasta `pdlc_devin_cli` (a mesma do setup).
+2. Digite `/orquestrar-producao {sua-iniciativa}`.
+3. Responda com dados de negócio quando o assistente pedir — metas, entrevistas, aprovações.
 
-Roteiro técnico: [configuração](docs/configuracao.html)
+Comandos que o Head usa com frequência:
+
+| Comando | Quando |
+|---------|--------|
+| `/orquestrar-producao {id}` | Ver onde está e o que fazer agora |
+| `/grill-me {id} {momento}` | Revisão crítica antes de decidir |
+| `/decidir-experimento {id}` | Depois dos testes com clientes reais |
+| `/validar-rollout-head {id}` | Validar métricas após canário em produção |
+
+Lista completa: [catálogo de skills](https://rodrigomacia.github.io/pdlc_devin_cli/catalogo-skills.html)
 
 ---
 
@@ -117,11 +195,7 @@ Roteiro técnico: [configuração](docs/configuracao.html)
 
 ## Repositório
 
-**GitHub:** [github.com/rodrigomacia/pdlc_devin_cli](https://github.com/rodrigomacia/pdlc_devin_cli)
-
-```bash
-git clone https://github.com/rodrigomacia/pdlc_devin_cli.git
-```
+**GitHub:** [github.com/rodrigomacia/pdlc_devin_cli](https://github.com/rodrigomacia/pdlc_devin_cli) · Instalação: [passos acima](#instalação-primeira-vez)
 
 Licença [MIT](LICENSE) · Contribuições bem-vindas.
 
