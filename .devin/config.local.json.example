@@ -1,0 +1,31 @@
+{
+  // Copie para config.local.json e preencha (não commitar)
+  // cp .devin/config.local.json.example .devin/config.local.json
+
+  "mcpServers": {
+    "okr-plataforma": {
+      "command": "npx",
+      "args": ["-y", "@sua-org/mcp-okr"],
+      "env": {
+        "OKR_API_KEY": "[SUA_CHAVE]"
+      }
+    },
+    "voc-analytics": {
+      "command": "npx",
+      "args": ["-y", "@sua-org/mcp-voc"],
+      "env": {}
+    },
+    "ci-cd": {
+      "url": "https://mcp.seu-pipeline.example/mcp",
+      "transport": "http"
+    }
+  },
+
+  "permissions": {
+    "allow": [
+      "Exec(git)",
+      "Exec(npm)",
+      "Exec(go)"
+    ]
+  }
+}

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ciclo de Produtação Digital — Apresentação Executiva</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface2: #eef2f8;
+      --border: #d8e0ec;
+      --text: #1a2332;
+      --muted: #5c6b7f;
+      --accent: #003882;
+      --accent2: #ff6b00;
+      --accent-soft: rgba(0, 56, 130, 0.08);
+      --accent2-soft: rgba(255, 107, 0, 0.1);
+      --success: #0d7a4e;
+      --warn: #b45309;
+      --f01: #2563eb;
+      --f02: #7c3aed;
+      --f03: #d97706;
+      --f04: #059669;
+      --f05: #dc2626;
+      --shadow: 0 4px 24px rgba(26, 35, 50, 0.08);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    /* —— Hero —— */
+    .hero {
+      background: linear-gradient(135deg, var(--accent) 0%, #0056b3 45%, #1e40af 100%);
+      color: #fff;
+      padding: 3.5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -10%;
+      top: -30%;
+      width: 55%;
+      height: 160%;
+      background: radial-gradient(circle, rgba(255,107,0,0.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      max-width: 18ch;
+    }
+    .hero-lead {
+      margin-top: 1.25rem;
+      font-size: 1.15rem;
+      opacity: 0.92;
+      max-width: 42rem;
+      font-weight: 400;
+    }
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero-stat strong {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .hero-stat span { font-size: 0.88rem; opacity: 0.85; }
+
+    /* —— Layout —— */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      margin-top: 3.5rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* —— Cards —— */
+    .card-grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card-grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+    @media (max-width: 900px) {
+      .card-grid-2, .card-grid-3, .card-grid-5 { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .card ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+    }
+
+    .card li { margin-bottom: 0.35rem; }
+
+    /* —— Problema / solução —— */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
+
+    .compare-before {
+      border-left: 4px solid #94a3b8;
+    }
+    .compare-after {
+      border-left: 4px solid var(--success);
+      background: linear-gradient(180deg, rgba(13,122,78,0.04) 0%, var(--surface) 100%);
+    }
+
+    /* —— Pipeline visual —— */
+    .pipeline {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      overflow-x: auto;
+      padding: 0.5rem 0 1rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pipeline-step {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      position: relative;
+    }
+
+    .pipeline-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -0.65rem;
+      top: 2.1rem;
+      color: var(--muted);
+      font-size: 1.25rem;
+      font-weight: 300;
+      z-index: 2;
+    }
+
+    .pipeline-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      margin: 0 auto 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .pipeline-step h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .pipeline-step p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding: 0 0.35rem;
+      line-height: 1.35;
+    }
+
+    .pipeline-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    /* —— Fase detalhada —— */
+    .phase-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .phase-badge {
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .phase-card h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+    .phase-card .who {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .phase-card .outcome {
+      margin-top: 0.75rem;
+      padding: 0.65rem 0.9rem;
+      background: var(--surface2);
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+    .phase-card .outcome strong { color: var(--text); }
+
+    /* —— Três validações —— */
+    .validation-ladder {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      position: relative;
+    }
+    @media (max-width: 800px) { .validation-ladder { grid-template-columns: 1fr; } }
+
+    .validation-step {
+      text-align: center;
+      padding: 1.75rem 1.25rem;
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      background: var(--surface);
+      position: relative;
+    }
+
+    .validation-step .step-num {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .validation-step.cheap { border-color: #c4b5fd; background: #faf5ff; }
+    .validation-step.real { border-color: #fcd34d; background: #fffbeb; }
+    .validation-step.prod { border-color: #6ee7b7; background: #ecfdf5; }
+
+    .validation-step h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .validation-step .price-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+    .validation-step.cheap .price-tag { color: var(--f02); }
+    .validation-step.real .price-tag { color: var(--f03); }
+    .validation-step.prod .price-tag { color: var(--f04); }
+
+    /* —— Papéis —— */
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 800px) { .roles { grid-template-columns: 1fr; } }
+
+    .role-card {
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      text-align: center;
+    }
+
+    .role-card.head {
+      background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 100%);
+      border: 2px solid rgba(0,56,130,0.2);
+    }
+    .role-card.ai {
+      background: linear-gradient(180deg, rgba(5,150,105,0.08) 0%, var(--surface) 100%);
+      border: 2px solid rgba(5,150,105,0.2);
+    }
+    .role-card.grill {
+      background: linear-gradient(180deg, var(--accent2-soft) 0%, var(--surface) 100%);
+      border: 2px solid rgba(255,107,0,0.25);
+    }
+
+    .role-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .role-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+    /* —— Gates —— */
+    .gate-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px dashed var(--border);
+    }
+
+    .gate-pill {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .gate-arrow { color: var(--muted); font-size: 1.25rem; }
+
+    /* —— Benefícios —— */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .benefit-grid { grid-template-columns: 1fr; } }
+
+    .benefit {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.25rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .benefit-num {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 8px;
+      background: var(--accent2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* —— CTA —— */
+    .cta {
+      background: linear-gradient(135deg, var(--accent) 0%, #1e40af 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta h2 { color: #fff; margin-bottom: 0.75rem; }
+    .cta p { opacity: 0.9; max-width: 36rem; margin: 0 auto 1.5rem; }
+
+    .cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .cta-links a {
+      display: inline-block;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+
+    .cta-links a:hover { transform: translateY(-2px); }
+
+    .cta-links .primary {
+      background: var(--accent2);
+      color: #fff;
+    }
+
+    .cta-links .secondary {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media print {
+      .hero { padding: 2rem; }
+      .pipeline { flex-wrap: wrap; }
+      .pipeline-step { min-width: 120px; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Proposta ao Comitê Executivo</span>
+      <h1>Ciclo de Produtação Digital com IA</h1>
+      <p class="hero-lead">
+        Um jeito padronizado de levar ideias do estratégico ao cliente — com decisões claras,
+        menos retrabalho e o Head de Produto no centro, apoiado por assistentes de inteligência artificial.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>5</strong>
+          <span>etapas do ciclo</span>
+        </div>
+        <div class="hero-stat">
+          <strong>3</strong>
+          <span>momentos de validação com cliente</span>
+        </div>
+        <div class="hero-stat">
+          <strong>1</strong>
+          <span>responsável por decisão (Head de Produto)</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- O que muda -->
+    <section>
+      <p class="section-label">Por que isso importa</p>
+      <h2>Do improviso ao processo repetível</h2>
+      <p class="section-intro">
+        Hoje, cada iniciativa pode seguir um caminho diferente. O ciclo proposto define
+        <strong>quando</strong> investir em construção e <strong>quem</strong> aprova cada passo —
+        antes de comprometer time de engenharia e orçamento.
+      </p>
+      <div class="compare">
+        <div class="card compare-before">
+          <h3>Sem o ciclo</h3>
+          <ul>
+            <li>Ideias viram projeto sem prova com cliente</li>
+            <li>Simulações confundidas com validação real</li>
+            <li>Deploy em produção sem marco de aprovação claro</li>
+            <li>Aprendizados da operação não voltam para o discovery</li>
+          </ul>
+        </div>
+        <div class="card compare-after">
+          <h3>Com o ciclo</h3>
+          <ul>
+            <li>Só constrói em escala depois de evidência com cliente real</li>
+            <li>Cada etapa tem entregável e “portão” de aprovação</li>
+            <li>Liberação em produção gradual (canário) com métricas</li>
+            <li>Operação alimenta a próxima rodada de descoberta</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Macro fluxo -->
+    <section>
+      <p class="section-label">Visão geral</p>
+      <h2>O ciclo em uma linha</h2>
+      <p class="section-intro">
+        Cinco fases conectadas. A operação fecha o loop devolvendo aprendizados para novas oportunidades.
+      </p>
+      <div class="pipeline-wrap">
+        <div class="pipeline">
+          <div class="pipeline-step">
+            <div class="pipeline-icon" style="background: var(--f01)">1</div>
+            <h4>Contexto</h4>
+            <p>Metas e OKRs alinhados à estratégia</p>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-icon" style="background: var(--f02)">2</div>
+            <h4>Descoberta</h4>
+            <p>Oportunidade e protótipo candidato</p>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-icon" style="background: var(--f03)">3</div>
+            <h4>Experimentação</h4>
+            <p>Teste com clientes reais</p>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-icon" style="background: var(--f04)">4</div>
+            <h4>Construção</h4>
+            <p>Produto, qualidade e liberação</p>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-icon" style="background: var(--f05)">5</div>
+            <h4>Operação</h4>
+            <p>Métricas, incidentes e insights</p>
+          </div>
+        </div>
+        <p style="text-align:center; margin-top:1.25rem; font-size:0.9rem; color:var(--muted);">
+          ↺ A fase 5 realimenta a fase 2 quando surgem novas oportunidades
+        </p>
+      </div>
+    </section>
+
+    <!-- Papéis -->
+    <section>
+      <p class="section-label">Quem faz o quê</p>
+      <h2>Três papéis — sem confusão de responsabilidade</h2>
+      <div class="roles">
+        <div class="role-card head">
+          <div class="role-icon">👤</div>
+          <h3>Head de Produto</h3>
+          <p>
+            Dono da iniciativa. Define direção, responde perguntas difíceis,
+            aprova cada portão e valida resultados com dados reais (métricas, clientes).
+            <strong>Não delega a decisão final à IA.</strong>
+          </p>
+        </div>
+        <div class="role-card ai">
+          <div class="role-icon">🤖</div>
+          <h3>Assistente de IA (Devin)</h3>
+          <p>
+            Executa tarefas repetíveis: pesquisa, rascunhos, especificações,
+            checagens de qualidade e relatórios. Produz artefatos para o Head revisar —
+            não inventa números nem aprova sozinho.
+          </p>
+        </div>
+        <div class="role-card grill">
+          <div class="role-icon">🔥</div>
+          <h3>Revisor crítico (“Grill”)</h3>
+          <p>
+            Antes de cada decisão importante, faz perguntas incômodas:
+            “Esta evidência sustenta a hipótese?” Evita avançar com narrativa bonita
+            e dado fraco.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Três validações -->
+    <section>
+      <p class="section-label">Diferencial do modelo</p>
+      <h2>Três momentos de validação — do barato ao real</h2>
+      <p class="section-intro">
+        O erro mais caro é confundir simulação com cliente real. O ciclo separa os três momentos
+        de forma explícita.
+      </p>
+      <div class="validation-ladder">
+        <div class="validation-step cheap">
+          <div class="step-num">1</div>
+          <p class="price-tag">Custo baixo · Rápido</p>
+          <h4>Descoberta + simulação</h4>
+          <p>
+            Mercado, dados do produto e voz do cliente cruzados.
+            Personas sintéticas filtram ideias fracas <em>antes</em> de gastar com teste real.
+            Entrega: protótipo e pacote <strong>candidato</strong> — ainda não aprovado para construir.
+          </p>
+        </div>
+        <div class="validation-step real">
+          <div class="step-num">2</div>
+          <p class="price-tag">Investimento médio · Evidência real</p>
+          <h4>Experimentação com clientes</h4>
+          <p>
+            Entrevistas, protótipo com usuários, testes de demanda ou A/B com tráfego real.
+            Só após “vale escalar” é que a construção em grande escala começa.
+          </p>
+        </div>
+        <div class="validation-step prod">
+          <div class="step-num">3</div>
+          <p class="price-tag">Produção controlada</p>
+          <h4>Canário em produção</h4>
+          <p>
+            Liberação para um grupo pequeno de clientes.
+            O Head valida KPIs no ambiente real antes de expandir para todos
+            ou acionar rollback.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- As 5 fases -->
+    <section>
+      <p class="section-label">Detalhamento</p>
+      <h2>As cinco etapas — em linguagem de negócio</h2>
+
+      <article class="phase-card">
+        <div class="phase-badge" style="background: var(--f01)">1</div>
+        <div>
+          <p class="who">Head + Estratégia · Plataforma de OKR</p>
+          <h3>Contexto estratégico</h3>
+          <p>
+            Traduz diretriz de negócio em metas mensuráveis (OKRs) com baseline, meta,
+            teto e ambição. Garante que toda iniciativa nasça amarrada ao que o banco
+            precisa mover.
+          </p>
+          <div class="outcome"><strong>Portão:</strong> OKRs cascateados e sincronizados — pronto para descobrir oportunidades.</div>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-badge" style="background: var(--f02)">2</div>
+        <div>
+          <p class="who">Head de Produto (ponta a ponta) · IA como apoio</p>
+          <h3>Descoberta (Go-to-Market)</h3>
+          <p>
+            Três lentes: mercado, comportamento no produto e voz do cliente.
+            Prioriza oportunidades com evidência, gera hipóteses testáveis,
+            valida com simulação barata e materializa em protótipo (ex.: Figma)
+            com histórias de valor por segmento.
+          </p>
+          <div class="outcome"><strong>Portão:</strong> Pacote candidato para teste real — ainda não é autorização para construir.</div>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-badge" style="background: var(--f03)">3</div>
+        <div>
+          <p class="who">Head executa com clientes · IA documenta e recomenda</p>
+          <h3>Experimentação</h3>
+          <p>
+            Testes com pessoas reais — não com robô. Ao final, decisão explícita:
+            <strong>escalar</strong> (ir para construção), <strong>ajustar</strong> (voltar à descoberta)
+            ou <strong>encerrar</strong> (não investir mais nesta aposta).
+          </p>
+          <div class="outcome"><strong>Portão:</strong> Evidência de cliente real registrada — só então autoriza construção.</div>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-badge" style="background: var(--f04)">4</div>
+        <div>
+          <p class="who">Head aprova o “o quê” · Engenharia via IA · Head valida canário</p>
+          <h3>Construção e liberação</h3>
+          <p>
+            Especificação clara do que o cliente verá (sem exigir que o Head leia código).
+            Revisão de qualidade antes de qualquer deploy.
+            Ambientes separados: teste integrado → homologação com simulações → produção
+            com versão rastreável. Liberação inicial para poucos clientes; expansão só após OK do Head.
+          </p>
+          <div class="outcome"><strong>Portão:</strong> Produto em produção com validação de negócio no canário.</div>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-badge" style="background: var(--f05)">5</div>
+        <div>
+          <p class="who">Operação + resposta a incidentes (ERT)</p>
+          <h3>Operação e aprendizado</h3>
+          <p>
+            Acompanha se as metas se movem, trata incidentes graves com visão 360°
+            (cliente, produto, negócio, tecnologia) e transforma sinais da operação
+            em novas oportunidades de descoberta.
+          </p>
+          <div class="outcome"><strong>Portão:</strong> Insights priorizados — ciclo recomeça na descoberta.</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Portões -->
+    <section>
+      <p class="section-label">Governança leve</p>
+      <h2>Portões de decisão — nada avança no automático</h2>
+      <p class="section-intro" style="margin-left:auto;margin-right:auto;text-align:center;">
+        Em cada transição entre etapas, o Head confirma que os critérios foram atendidos.
+        O revisor crítico questiona antes do “sim” final.
+      </p>
+      <div class="gate-flow">
+        <span class="gate-pill">Portão 1 · Estratégia</span>
+        <span class="gate-arrow">→</span>
+        <span class="gate-pill">Portão 2 · Oportunidade</span>
+        <span class="gate-arrow">→</span>
+        <span class="gate-pill">Portão 3 · Cliente real</span>
+        <span class="gate-arrow">→</span>
+        <span class="gate-pill">Portão 4 · Produção</span>
+        <span class="gate-arrow">→</span>
+        <span class="gate-pill">Portão 5 · Aprendizado</span>
+      </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section>
+      <p class="section-label">Valor para o negócio</p>
+      <h2>O que o comitê ganha com este modelo</h2>
+      <div class="benefit-grid">
+        <div class="benefit">
+          <span class="benefit-num">1</span>
+          <div>
+            <strong>Menos desperdício</strong><br />
+            Construção em escala só depois de prova com cliente — não depois de slide ou simulação.
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">2</span>
+          <div>
+            <strong>Rastreabilidade</strong><br />
+            Da meta estratégica à métrica em produção — auditável para compliance e priorização.
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">3</span>
+          <div>
+            <strong>Velocidade com controle</strong><br />
+            IA acelera pesquisa e documentação; humano mantém o veto nas decisões caras.
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">4</span>
+          <div>
+            <strong>Risco de produção reduzido</strong><br />
+            Canário, rollback explícito e homologação antes de expor todos os clientes.
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">5</span>
+          <div>
+            <strong>Aprendizado contínuo</strong><br />
+            Operação devolve sinais para a próxima onda de descoberta — o ciclo não termina no deploy.
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">6</span>
+          <div>
+            <strong>Modelo replicável</strong><br />
+            Mesmo processo para qualquer iniciativa — escala conhecimento, não só headcount.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pedido ao comitê -->
+    <section>
+      <p class="section-label">Próximos passos</p>
+      <h2>O que pedimos ao comitê</h2>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <h3>✓ Endossar o modelo</h3>
+          <p>Reconhecer o ciclo de 5 etapas e os três momentos de validação como padrão para iniciativas digitais prioritárias.</p>
+        </div>
+        <div class="card">
+          <h3>✓ Piloto orientado</h3>
+          <p>Escolher 1–2 iniciativas reais no próximo trimestre, com Head nomeado e métricas de sucesso do piloto (tempo até evidência real, retrabalho evitado).</p>
+        </div>
+        <div class="card">
+          <h3>✓ Habilitadores</h3>
+          <p>Acesso à Plataforma de OKR, canais de voz do cliente, analytics e ambiente de homologação — sem isso a IA para e pede dado ao operador.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta">
+      <h2>Pronto para aprofundar?</h2>
+      <p>
+        Esta página é a visão executiva. Detalhes operacionais e fluxos técnicos
+        estão na documentação do framework — para times de produto e engenharia.
+      </p>
+      <div class="cta-links">
+        <a class="primary" href="fluxo-head-produto-devin.html">Fluxo do Head × IA</a>
+        <a class="secondary" href="fluxo-producao.html">Mapa técnico completo</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    Ciclo de Produtação Digital · Framework de skills · Uso interno · Maio 2026
+  </footer>
+
+</body>
+</html>

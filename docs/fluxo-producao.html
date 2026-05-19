@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ciclo de Produtação Digital — Skills, Agentes e Capacidades</title>
+  <style>
+    :root {
+      --bg: #0f1114;
+      --surface: #181b21;
+      --surface2: #1f242c;
+      --border: #2d3544;
+      --text: #e8eaed;
+      --muted: #9aa3b2;
+      --accent: #4f8cff;
+      --accent-dim: rgba(79, 140, 255, 0.12);
+      --skill: #7c6cf0;
+      --skill-dim: rgba(124, 108, 240, 0.15);
+      --agent: #3ecf8e;
+      --agent-dim: rgba(62, 207, 142, 0.12);
+      --sub: #f0b429;
+      --sub-dim: rgba(240, 180, 41, 0.12);
+      --tool: #ff7b72;
+      --tool-dim: rgba(255, 123, 114, 0.12);
+      --gate: #a78bfa;
+      --f00: #6b7280;
+      --f01: #4f8cff;
+      --f02: #7c6cf0;
+      --f03: #f0b429;
+      --f04: #3ecf8e;
+      --f05: #ff7b72;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    header {
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 0.5rem;
+      max-width: 52rem;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    section > p.section-desc {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      max-width: 48rem;
+    }
+
+    /* Flow diagram */
+    .flow-wrap {
+      overflow-x: auto;
+      padding: 1rem 0 1.5rem;
+    }
+
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-width: 1100px;
+    }
+
+    .flow-col {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-col.start {
+      flex: 0 0 120px;
+      min-width: 120px;
+    }
+
+    .flow-arrow {
+      flex: 0 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--border);
+      font-size: 1.25rem;
+      padding-top: 2.5rem;
+    }
+
+    .favo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .favo-head {
+      padding: 0.65rem 0.85rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .favo-body {
+      padding: 0.75rem 0.85rem;
+      font-size: 0.78rem;
+    }
+
+    .favo-body .gate {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.15rem 0.45rem;
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--gate);
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+    }
+
+    .chip {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: ui-monospace, "Cascadia Code", monospace;
+      font-size: 0.68rem;
+      word-break: break-all;
+    }
+
+    .chip.skill { background: var(--skill-dim); color: #b8afff; }
+    .chip.agent { background: var(--agent-dim); color: #7ddeb0; }
+    .chip.sub { background: var(--sub-dim); color: #f5d078; }
+    .chip.handoff { background: var(--accent-dim); color: var(--accent); }
+
+    .orchestrator-box {
+      background: var(--surface2);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 0.85rem;
+      height: 100%;
+    }
+
+    .orchestrator-box .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--f00);
+      margin-bottom: 0.5rem;
+    }
+
+  .loop-note {
+      margin-top: 1.5rem;
+      padding: 0.85rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .loop-note strong { color: var(--f05); }
+
+    /* Hierarchy */
+    .hierarchy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .hier-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+    }
+
+    .hier-card h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .hier-card ul {
+      list-style: none;
+      font-size: 0.8rem;
+    }
+
+    .hier-card li {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .hier-card li:last-child { border-bottom: none; }
+
+    .hier-card li code {
+      color: var(--text);
+      font-size: 0.75rem;
+    }
+
+    /* Stage detail cards */
+    .stages {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .stage {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .stage-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stage-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .stage-title h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .stage-title span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .stage-gate {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.65rem;
+      background: rgba(167, 139, 250, 0.12);
+      color: var(--gate);
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    @media (max-width: 960px) {
+      .stage-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .stage-grid { grid-template-columns: 1fr; }
+    }
+
+    .stage-col {
+      padding: 1rem 1.15rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .stage-col:last-child { border-right: none; }
+
+    @media (max-width: 960px) {
+      .stage-col:nth-child(2) { border-right: none; }
+      .stage-col { border-bottom: 1px solid var(--border); }
+      .stage-col:last-child { border-bottom: none; }
+    }
+
+    .stage-col h4 {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.65rem;
+      font-weight: 600;
+    }
+
+    .stage-col.skills h4 { color: #b8afff; }
+    .stage-col.agents h4 { color: #7ddeb0; }
+    .stage-col.tools h4 { color: #ff9b94; }
+    .stage-col.cap h4 { color: var(--accent); }
+
+    .stage-col ul {
+      list-style: none;
+      font-size: 0.8rem;
+    }
+
+    .stage-col li {
+      margin-bottom: 0.4rem;
+      color: var(--muted);
+      padding-left: 0;
+    }
+
+    .stage-col li code,
+    .stage-col li strong {
+      color: var(--text);
+      font-size: 0.78rem;
+    }
+
+    .tool-tier {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tool-tier:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .tool-tier .tier-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Transversal */
+    .transversal {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .trans-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .trans-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+  .matrix-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--surface2);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td { color: var(--muted); }
+    td code { color: var(--text); font-size: 0.75rem; }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ciclo de Produtação Digital</h1>
+  <p>
+    Visão do fluxo com <strong>skills</strong> (comandos Devin), <strong>agentes</strong> (perfis AGENT.md),
+    <strong>subagentes</strong> (execução isolada) e <strong>capacidades</strong> (tools / integrações que cada etapa exige
+    num modelo de execução completo).
+  </p>
+  <div class="legend">
+    <div class="legend-item"><span class="dot" style="background: var(--skill)"></span> Skill (comando /)</div>
+    <div class="legend-item"><span class="dot" style="background: var(--agent)"></span> Agente primário</div>
+    <div class="legend-item"><span class="dot" style="background: var(--sub)"></span> Subagente</div>
+    <div class="legend-item"><span class="dot" style="background: var(--tool)"></span> Capacidade (tool / MCP)</div>
+    <div class="legend-item"><span class="dot" style="background: var(--gate)"></span> Gate</div>
+  </div>
+</header>
+
+<main>
+
+  <section>
+    <h2>Fluxo macro</h2>
+    <p class="section-desc">
+      Orquestração central, cinco favos sequenciais, handoffs entre etapas e loop de operação → discovery.
+      Governança atravessa todos os favos.
+    </p>
+
+    <div class="flow-wrap">
+      <div class="flow">
+
+        <div class="flow-col start">
+          <div class="orchestrator-box">
+            <div class="label">00 Orquestração</div>
+            <div class="chip-list">
+              <div class="chip skill">/orquestrar-producao</div>
+              <div class="chip handoff">/curar-contexto</div>
+              <div class="chip agent">Orquestrador</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-col">
+          <div class="favo-card">
+            <div class="favo-head" style="background: rgba(79,140,255,0.15); color: var(--f01)">01 Contexto</div>
+            <div class="favo-body">
+              <div class="chip tool" style="display:block;margin-bottom:0.35rem;background:var(--tool-dim);color:#ff9b94;padding:0.2rem 0.45rem;border-radius:4px;font-size:0.65rem;font-family:ui-monospace,monospace">Tool: Plataforma OKR</div>
+              <div class="chip-list">
+                <div class="chip skill">/sync-okr pull·push</div>
+                <div class="chip skill">/draft-okr</div>
+                <div class="chip skill">/desdobrar-okr</div>
+                <div class="chip skill">/auditar-okr</div>
+                <div class="chip agent">sync-okr</div>
+                <div class="chip agent">desdobrador-okr</div>
+                <div class="chip sub">auditor-okr ⊂</div>
+              </div>
+              <div class="gate">Gate 01</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-col">
+          <div class="chip handoff" style="margin-bottom:0.35rem; text-align:center">handoff 01→02</div>
+          <div class="favo-card">
+            <div class="favo-head" style="background: rgba(124,108,240,0.15); color: var(--f02)">02 Discovery</div>
+            <div class="favo-body">
+              <div class="chip-list">
+                <div class="chip skill">/visao-mercado</div>
+                <div class="chip skill">/visao-produto</div>
+                <div class="chip skill">/visao-cliente</div>
+                <div class="chip skill">/sintetizar-visoes</div>
+                <div class="chip skill">/gerar-hipoteses</div>
+                <div class="chip skill">/testar-svm</div>
+                <div class="chip skill">/prototipo-figma</div>
+                <div class="chip skill">/feature-stories</div>
+                <div class="chip agent">discovery-lead (GTM)</div>
+                <div class="chip sub">market-researcher ⊂</div>
+                <div class="chip sub">product-analytics ⊂</div>
+                <div class="chip sub">voc-analyst ⊂</div>
+                <div class="chip sub">personas-sinteticas ⊂</div>
+                <div class="chip sub">prototipador ⊂</div>
+                <div class="chip sub">feature-writer ⊂</div>
+              </div>
+              <div class="gate">Gate 02 — feature candidata (validacao_real: pendente)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-col">
+          <div class="chip handoff" style="margin-bottom:0.35rem; text-align:center">handoff 02→03</div>
+          <div class="favo-card">
+            <div class="favo-head" style="background: rgba(240,180,41,0.12); color: var(--f03)">03 Experimentação</div>
+            <div class="favo-body">
+              <div class="chip-list">
+                <div class="chip skill">/experiments-backlog</div>
+                <div class="chip skill">/design-experimento</div>
+                <div class="chip skill">/registrar-resultado</div>
+                <div class="chip skill">/decidir-experimento</div>
+                <div class="chip agent">experiment-lead</div>
+                <div class="chip sub">experiment-lead ⊂</div>
+              </div>
+              <div class="gate">Gate 03 — scale→04 | iterate/kill→02</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-col">
+          <div class="chip handoff" style="margin-bottom:0.35rem; text-align:center">handoff 03→04</div>
+          <div class="favo-card">
+            <div class="favo-head" style="background: rgba(62,207,142,0.12); color: var(--f04)">04 Construção</div>
+            <div class="favo-body">
+              <div class="chip-list">
+                <div class="chip skill">/spec-funcional</div>
+                <div class="chip skill">/review-pr</div>
+                <div class="chip skill">/ci-validar</div>
+                <div class="chip skill">/cd-promover</div>
+                <div class="chip skill">/rollout-canario</div>
+                <div class="chip agent">builder-lead</div>
+              </div>
+              <div class="gate">Gate 04</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-col">
+          <div class="chip handoff" style="margin-bottom:0.35rem; text-align:center">handoff 04→05</div>
+          <div class="favo-card">
+            <div class="favo-head" style="background: rgba(255,123,114,0.12); color: var(--f05)">05 Operação</div>
+            <div class="favo-body">
+              <div class="chip-list">
+                <div class="chip skill">/review-metricas</div>
+                <div class="chip skill">/postmortem</div>
+                <div class="chip skill">/insight-para-discovery</div>
+                <div class="chip agent">operador-lead</div>
+                <div class="chip sub">operador-lead ⊂</div>
+              </div>
+              <div class="gate">Gate 05 (loop)</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="loop-note">
+      <strong>Loop contínuo:</strong> <code>/insight-para-discovery</code> → <code>/curar-contexto 05 02</code> → re-alimenta <code>/visao-produto</code> e <code>/visao-cliente</code>
+      — operação alimenta discovery sem reiniciar o ciclo estratégico.
+    </div>
+
+    <div class="loop-note" style="margin-top: 0.75rem">
+      <strong>Transversal:</strong> <code>/grill-me {id} {momento}</code> via <code>grill-me</code> ⊂ — adversário em cada decisão.
+      <code>/governanca-check</code> via <code>guardiao-governanca</code> ⊂ — compliance.
+      <a href="fluxo-head-produto-devin.html" style="color:var(--accent)">Fluxo Head × Devin CLI</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Hierarquia de execução</h2>
+    <p class="section-desc">Como skills, agentes e subagentes se relacionam no Devin CLI (um nível de subagente).</p>
+    <div class="hierarchy-grid">
+      <div class="hier-card">
+        <h3 style="color: var(--skill)">Skill</h3>
+        <ul>
+          <li>Comando invocável: <code>/nome {args}</code></li>
+          <li>Define entrada, saída e path em <code>colmeia/</code></li>
+          <li>Pode rodar inline ou spawnar subagente</li>
+          <li>14 skills no framework</li>
+        </ul>
+      </div>
+      <div class="hier-card">
+        <h3 style="color: var(--agent)">Agente (AGENT.md)</h3>
+        <ul>
+          <li>Perfil com system prompt + tools permitidas</li>
+          <li>9 agentes em <code>.devin/agents/</code></li>
+          <li>Dono de um favo ou função transversal</li>
+        </ul>
+      </div>
+      <div class="hier-card">
+        <h3 style="color: var(--sub)">Subagente (⊂)</h3>
+        <ul>
+          <li><code>subagent: true</code> ou <code>agent: {id}</code> no SKILL.md</li>
+          <li>Contexto isolado; pai sintetiza resultado</li>
+          <li>Não aninha outro subagente</li>
+          <li>Ex.: auditor-okr, reviewer, decidir-experimento</li>
+        </ul>
+      </div>
+      <div class="hier-card">
+        <h3 style="color: var(--tool)">Capacidade (tool)</h3>
+        <ul>
+          <li>Integração externa ou tool nativa</li>
+          <li>Declarada em <code>allowed-tools</code> + MCP</li>
+          <li>Requisito por etapa — tabela abaixo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Etapas — skills, agentes e modelo de capacidades</h2>
+    <p class="section-desc">
+      Para cada favo: skills do framework, agentes associados e <strong>capacidades</strong> recomendadas
+      (tools nativas Devin, MCP e sistemas externos) para executar o ciclo em produção.
+    </p>
+
+    <div class="stages">
+
+      <!-- 00 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(107,114,128,0.2); color: var(--f00)">00</div>
+          <div class="stage-title">
+            <h3>Orquestração</h3>
+            <span>Roteamento, handoffs, coerência do ciclo</span>
+          </div>
+          <div class="stage-gate">—</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li><code>/orquestrar-producao</code></li>
+              <li><code>/curar-contexto</code></li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li>Orquestrador (skill inline)</li>
+              <li>Curador de contexto (skill inline)</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>grep</code>, <code>glob</code></li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades externas</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">Conhecimento</div>
+                Índice colmeia, gates, artefatos por favo
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Runtime</div>
+                FS: <code>_iniciativas/</code>, <code>_handoffs/</code>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 01 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(79,140,255,0.2); color: var(--f01)">01</div>
+          <div class="stage-title">
+            <h3>Contexto Estratégico</h3>
+            <span>Desdobramento OKR · Plataforma OKR · baseline / target / roof / moonshot</span>
+          </div>
+          <div class="stage-gate">Gate 01</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li><code>/sync-okr-plataforma</code> pull / push</li>
+              <li><code>/draft-okr</code></li>
+              <li><code>/desdobrar-okr</code></li>
+              <li><code>/auditar-okr</code> → sub</li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li><strong>sync-okr</strong> — tool Plataforma OKR</li>
+              <li><strong>desdobrador-okr</strong> — cascata L0→L3</li>
+              <li><strong>estrategista-okr</strong></li>
+              <li><strong>auditor-okr</strong> ⊂</li>
+              <li><strong>mapeador-metricas</strong> ⊂ — 4 metas</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>edit</code>, <code>grep</code>, <code>glob</code></li>
+              <li>MCP: <code>okr.read_tree</code>, <code>okr.upsert_*</code></li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades — Plataforma OKR</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">Tool principal</div>
+                Acompanhamento multi-nível: <strong>OKR · KR · KPI</strong>
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Quatro metas</div>
+                <code>baseline</code> · <code>target</code> · <code>roof</code> · <code>moonshot</code> por indicador
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Desdobramento</div>
+                <code>okr.link_parent</code>, pesos <code>contribui</code>, níveis L0–L4
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Progresso</div>
+                <code>okr.progress</code>, check-in — favo 05
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(124,108,240,0.2); color: var(--f02)">02</div>
+          <div class="stage-title">
+            <h3>Discovery — modelo Go-to-Market</h3>
+            <span>3 visões (Mercado · Produto · Cliente) → hipóteses → SVM com personas sintéticas → protótipo Figma → feature com histórias por valor</span>
+          </div>
+          <div class="stage-gate">Gate 02</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li><code>/visao-mercado</code></li>
+              <li><code>/visao-produto</code></li>
+              <li><code>/visao-cliente</code></li>
+              <li><code>/sintetizar-visoes</code></li>
+              <li><code>/gerar-hipoteses</code></li>
+              <li><code>/testar-svm</code> → sub</li>
+              <li><code>/prototipo-figma</code> → sub</li>
+              <li><code>/feature-stories</code> → sub</li>
+              <li><code>/prep-entrevista</code></li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li><strong>discovery-lead</strong> — Head de Produto (GTM) ponta-a-ponta</li>
+              <li><strong>market-researcher</strong> ⊂ — Visão Mercado</li>
+              <li><strong>product-analytics</strong> ⊂ — Visão Produto</li>
+              <li><strong>voc-analyst</strong> ⊂ — Voz do Cliente</li>
+              <li><strong>personas-sinteticas</strong> ⊂ — SVM</li>
+              <li><strong>prototipador</strong> ⊂ — Figma</li>
+              <li><strong>feature-writer</strong> ⊂ — histórias por valor</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>edit</code>, <code>grep</code>, <code>glob</code>, <code>web_search</code></li>
+              <li>MCP VOC: <code>voc.transcription</code>, <code>voc.app_reviews</code>, <code>voc.tickets</code>, <code>voc.social</code>, <code>voc.surveys</code>, <code>voc.segment_tag</code></li>
+              <li>MCP Produto: <code>prod.funnel</code>, <code>prod.journey_time</code>, <code>prod.journey_loops</code>, <code>prod.dead_click</code>, <code>prod.rage_click</code>, <code>prod.cohort_retention</code></li>
+              <li>MCP Personas: <code>synth.persona_build</code>, <code>synth.persona_run</code>, <code>synth.svm_score</code></li>
+              <li>MCP Figma: <code>figma.read_frame</code>, <code>figma.export_spec</code>, <code>figma.comment</code></li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades — três visões + SVM + Figma</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">Visão Mercado</div>
+                Tendências, concorrência, pesquisa, cenários sintéticos <code>[SINTÉTICO]</code>
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Visão Produto</div>
+                Funil, dead/rage click, jornada em loop, tempo p50/p90, cohort — tudo segmentado
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Visão Cliente (VOC)</div>
+                Transcrição de central, reviews loja, suporte, social, NPS/CSAT, entrevistas
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Segmentação</div>
+                Dimensão transversal — toda visão segmentada (CDP / DW)
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">SVM</div>
+                Personas sintéticas validam hipóteses antes do protótipo · filtro pré-cliente real
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Protótipo</div>
+                Figma com anotação de hipótese por tela
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Entregável</div>
+                <strong>Feature</strong> com <strong>histórias segmentadas por valor</strong> — pronta para deploy + teste com clientes reais
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(240,180,41,0.2); color: var(--f03)">03</div>
+          <div class="stage-title">
+            <h3>Experimentação</h3>
+            <span>Hipóteses, evidência, decisão scale/kill</span>
+          </div>
+          <div class="stage-gate">Gate 03</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li><code>/experiments-backlog</code></li>
+              <li><code>/design-experimento</code></li>
+              <li><code>/registrar-resultado</code></li>
+              <li><code>/decidir-experimento</code> → sub (roteia 04 ou 02)</li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li><strong>experiment-lead</strong></li>
+              <li><strong>experiment-lead</strong> ⊂ (decisão)</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>edit</code>, <code>grep</code>, <code>glob</code></li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades externas</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">Teste</div>
+                Fake door, A/B, usability lab, Wizard-of-Oz
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Flags</div>
+                Feature flags / experiment platform (LaunchDarkly MCP)
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Dados</div>
+                Export resultados, significância estatística
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Técnico</div>
+                POC técnico no favo 04 (não experimento Head no 03)
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(62,207,142,0.2); color: var(--f04)">04</div>
+          <div class="stage-title">
+            <h3>Construção</h3>
+            <span>Release, PR, qualidade, rastreabilidade</span>
+          </div>
+          <div class="stage-gate">Gate 04</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li>SDD: <code>/spec-funcional</code> … <code>/implementar-tarefa</code></li>
+              <li><code>/review-pr</code> → sub <strong>antes de CI/CD</strong></li>
+              <li><code>/ci-validar</code> · <code>/prep-release</code> · <code>/cd-promover</code></li>
+              <li><code>/rollout-canario</code> · <code>/rollout-rollback</code></li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li><strong>builder-lead</strong></li>
+              <li><strong>reviewer</strong> ⊂</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>edit</code>, <code>grep</code>, <code>glob</code></li>
+              <li><code>exec</code> (git diff, log, status)</li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades externas</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">SCM</div>
+                GitHub/GitLab MCP — PR, checks, merge
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">CI/CD</div>
+                Pipeline status, artefatos de build (Actions, Jenkins)
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Segurança</div>
+                SAST/DAST, dependabot, SBOM
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Release</div>
+                Changelog, semver, rollback runbook
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(255,123,114,0.2); color: var(--f05)">05</div>
+          <div class="stage-title">
+            <h3>Operação</h3>
+            <span>Métricas, incidentes, loop para discovery</span>
+          </div>
+          <div class="stage-gate">Gate 05 → 02</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li><code>/review-metricas</code></li>
+              <li><code>/postmortem</code> → sub</li>
+              <li><code>/insight-para-discovery</code></li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li><strong>operador-lead</strong></li>
+              <li><strong>operador-lead</strong> ⊂ (postmortem)</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>edit</code>, <code>grep</code>, <code>glob</code></li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades externas</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">Observabilidade</div>
+                Métricas, logs, traces, SLO (Datadog, Grafana MCP)
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Incidentes</div>
+                PagerDuty, status page, timeline (incident MCP)
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Produto</div>
+                OKR tracking, North Star dashboard
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Feedback</div>
+                NPS/CSAT, suporte — loop qualitativo
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Transversal -->
+      <article class="stage">
+        <div class="stage-header">
+          <div class="stage-num" style="background: rgba(167,139,250,0.2); color: var(--gate)">⊕</div>
+          <div class="stage-title">
+            <h3>Transversal — Governança</h3>
+            <span>Todos os favos 01–05 (sob demanda)</span>
+          </div>
+          <div class="stage-gate">Condicional</div>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-col skills">
+            <h4>Skills</h4>
+            <ul>
+              <li><code>/governanca-check</code> → sub</li>
+            </ul>
+          </div>
+          <div class="stage-col agents">
+            <h4>Agentes</h4>
+            <ul>
+              <li><strong>guardiao-governanca</strong> ⊂</li>
+            </ul>
+          </div>
+          <div class="stage-col tools">
+            <h4>Tools Devin</h4>
+            <ul>
+              <li><code>read</code>, <code>grep</code>, <code>glob</code> (somente leitura)</li>
+            </ul>
+          </div>
+          <div class="stage-col cap">
+            <h4>Capacidades externas</h4>
+            <ul>
+              <div class="tool-tier">
+                <div class="tier-label">Política</div>
+                <code>colmeia/_config/governanca.md</code>
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Compliance</div>
+                GRC, jurídico, privacidade (workflow humano)
+              </div>
+              <div class="tool-tier">
+                <div class="tier-label">Risco</div>
+                Comitê de produto, aprovações formais
+              </div>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Matriz — capacidades × etapa</h2>
+    <p class="section-desc">Visão consolidada de quais classes de tool cada favo consome (● = necessário, ○ = opcional).</p>
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Capacidade</th>
+            <th>00</th>
+            <th>01</th>
+            <th>02</th>
+            <th>03</th>
+            <th>04</th>
+            <th>05</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>FS colmeia</code> (read/write artefatos)</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+          <tr><td><code>grep / glob</code> (navegação repo)</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+          <tr><td><code>web_search</code> (scanning, mercado)</td><td>○</td><td>●</td><td>○</td><td>○</td><td>○</td><td>○</td></tr>
+          <tr><td>BI / métricas / baselines</td><td>○</td><td>●</td><td>●</td><td>●</td><td>○</td><td>●</td></tr>
+          <tr><td>Pesquisa qualitativa (entrevistas)</td><td>○</td><td>○</td><td>●</td><td>●</td><td>○</td><td>○</td></tr>
+          <tr><td>Experimentação / feature flags</td><td>○</td><td>○</td><td>○</td><td>●</td><td>○</td><td>○</td></tr>
+          <tr><td><code>exec</code> git / CI</td><td>○</td><td>○</td><td>○</td><td>○</td><td>●</td><td>○</td></tr>
+          <tr><td>Observabilidade / SLO / alertas</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>●</td></tr>
+          <tr><td>Gestão incidentes / postmortem</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>●</td></tr>
+          <tr><td>Governança / compliance (MCP ou config)</td><td>○</td><td>●</td><td>●</td><td>●</td><td>●</td><td>○</td></tr>
+          <tr><td>Issue tracker (Linear, Jira)</td><td>○</td><td>○</td><td>●</td><td>●</td><td>●</td><td>○</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mapa skill → agent → subagente</h2>
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Agente</th>
+            <th>Subagente?</th>
+            <th>Favo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/orquestrar-producao</code></td><td>— (inline)</td><td>—</td><td>00</td></tr>
+          <tr><td><code>/curar-contexto</code></td><td>— (inline)</td><td>—</td><td>00</td></tr>
+          <tr><td><code>/grill-me</code></td><td>grill-me</td><td>⊂</td><td>⊕ transversal</td></tr>
+          <tr><td><code>/draft-okr</code></td><td>estrategista-okr</td><td>—</td><td>01</td></tr>
+          <tr><td><code>/auditar-okr</code></td><td>auditor-okr</td><td>⊂</td><td>01</td></tr>
+          <tr><td><code>/visao-mercado</code></td><td>market-researcher</td><td>⊂</td><td>02</td></tr>
+          <tr><td><code>/visao-produto</code></td><td>product-analytics</td><td>⊂</td><td>02</td></tr>
+          <tr><td><code>/visao-cliente</code></td><td>voc-analyst</td><td>⊂</td><td>02</td></tr>
+          <tr><td><code>/sintetizar-visoes</code></td><td>discovery-lead</td><td>—</td><td>02</td></tr>
+          <tr><td><code>/gerar-hipoteses</code></td><td>discovery-lead</td><td>—</td><td>02</td></tr>
+          <tr><td><code>/testar-svm</code></td><td>personas-sinteticas</td><td>⊂</td><td>02</td></tr>
+          <tr><td><code>/prototipo-figma</code></td><td>prototipador</td><td>⊂</td><td>02</td></tr>
+          <tr><td><code>/feature-stories</code></td><td>feature-writer</td><td>⊂</td><td>02</td></tr>
+          <tr><td><code>/prep-entrevista</code></td><td>— (inline)</td><td>—</td><td>02</td></tr>
+          <tr><td><code>/experiments-backlog</code></td><td>experiment-lead</td><td>—</td><td>03</td></tr>
+          <tr><td><code>/design-experimento</code></td><td>experiment-lead</td><td>—</td><td>03</td></tr>
+          <tr><td><code>/registrar-resultado</code></td><td>— (inline)</td><td>—</td><td>03</td></tr>
+          <tr><td><code>/decidir-experimento</code></td><td>experiment-lead</td><td>⊂</td><td>03</td></tr>
+          <tr><td><code>/prep-release</code></td><td>builder-lead</td><td>—</td><td>04</td></tr>
+          <tr><td><code>/review-pr</code></td><td>reviewer</td><td>⊂</td><td>04</td></tr>
+          <tr><td><code>/review-metricas</code></td><td>operador-lead</td><td>—</td><td>05</td></tr>
+          <tr><td><code>/postmortem</code></td><td>operador-lead</td><td>⊂</td><td>05</td></tr>
+          <tr><td><code>/insight-para-discovery</code></td><td>operador-lead</td><td>—</td><td>05</td></tr>
+          <tr><td><code>/governanca-check</code></td><td>guardiao-governanca</td><td>⊂</td><td>⊕</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Framework Ciclo de Produtação Digital — documentação visual.
+  Repositório: <code>colmeia/00-nucleo/catalogo-skills.md</code> · Devin: <code>.devin/skills/</code>
+</footer>
+
+</body>
+</html>

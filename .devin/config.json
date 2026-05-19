@@ -1,0 +1,35 @@
+{
+  // Ciclo de Produtação Digital — configuração de projeto (commitar no git)
+  // Sobrescreva segredos em config.local.json (gitignored)
+  // Docs: https://cli.devin.ai/docs/reference/configuration/config-file
+
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Write(colmeia/**)",
+      "Write(.devin/**)",
+      "Write(docs/**)",
+      "Grep(**)",
+      "Glob(**)"
+    ],
+    "ask": [
+      "Write(**/.env*)",
+      "Write(**/secrets/**)",
+      "Exec(**)",
+      "Write(**)"
+    ],
+    "deny": [
+      "Write(**/.git/**)"
+    ]
+  },
+
+  "mcpServers": {
+    "_comment": "Preencha em config.local.json — ver colmeia/_config/*.md"
+  },
+
+  "read_config_from": {
+    "cursor": true,
+    "windsurf": false,
+    "claude": false
+  }
+}

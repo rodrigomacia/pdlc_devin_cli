@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ciclo de Produtação Digital — framework multi-agente com Devin CLI para Go-to-Market ponta a ponta." />
+  <title>Ciclo de Produtação Digital — Documentação</title>
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="site-logo">🍯 Ciclo de Produtação Digital</a>
+    <nav class="site-nav">
+      <a href="guia-inicio.html">Começar</a>
+      <a href="configuracao.html">Configurar</a>
+      <a href="catalogo-skills.html">Skills</a>
+      <a href="apresentacao-executiva.html">Executivo</a>
+      <a href="colmeia/00-nucleo/indice-colmeia.md">Colmeia (MD)</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero-block">
+      <h1>Produtação Digital com IA multi-agente</h1>
+      <p>
+        Framework completo para o Head de Produto conduzir iniciativas do OKR ao cliente em produção —
+        com portões de decisão, validação em três momentos e 46 skills no Devin CLI.
+      </p>
+    </div>
+
+    <div class="grid grid-3">
+      <a href="guia-inicio.html" class="card" style="text-decoration:none;color:inherit">
+        <span class="tag tag-guide">Comece aqui</span>
+        <h3>Guia de início rápido</h3>
+        <p>Instale, configure e execute sua primeira iniciativa com <code>/orquestrar-producao</code>.</p>
+      </a>
+      <a href="configuracao.html" class="card" style="text-decoration:none;color:inherit">
+        <span class="tag tag-tech">Setup</span>
+        <h3>Configuração Devin CLI</h3>
+        <p>Script de setup, MCP, permissões e templates em <code>colmeia/_config/</code>.</p>
+      </a>
+      <a href="apresentacao-executiva.html" class="card" style="text-decoration:none;color:inherit">
+        <span class="tag tag-exec">Comitê</span>
+        <h3>Apresentação executiva</h3>
+        <p>Visão para liderança — linguagem de negócio, sem jargão técnico.</p>
+      </a>
+    </div>
+
+    <h2 class="section-title">Fluxos visuais</h2>
+    <div class="grid grid-2">
+      <a href="fluxo-head-produto-devin.html" class="card" style="text-decoration:none;color:inherit">
+        <h3>Head de Produto × Devin CLI</h3>
+        <p>Como o Head conversa com a IA em cada etapa, incluindo o revisor crítico (grill-me).</p>
+      </a>
+      <a href="fluxo-producao.html" class="card" style="text-decoration:none;color:inherit">
+        <h3>Mapa técnico completo</h3>
+        <p>Skills, agentes, subagentes e capacidades externas por favo do ciclo.</p>
+      </a>
+    </div>
+
+    <h2 class="section-title">O ciclo em 5 etapas</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="favo-pill f01">01</span>
+        <h3>Contexto estratégico</h3>
+        <p>OKRs, metas e tese de produto alinhados à plataforma.</p>
+        <p style="margin-top:0.5rem"><a href="colmeia/01-contexto-estrategico/README.md">Documentação →</a></p>
+      </div>
+      <div class="card">
+        <span class="favo-pill f02">02</span>
+        <h3>Descoberta</h3>
+        <p>Três visões, hipóteses, protótipo e feature candidata.</p>
+        <p style="margin-top:0.5rem"><a href="colmeia/02-discovery/README.md">Documentação →</a></p>
+      </div>
+      <div class="card">
+        <span class="favo-pill f03">03</span>
+        <h3>Experimentação</h3>
+        <p>Teste com clientes reais — scale, iterate ou kill.</p>
+        <p style="margin-top:0.5rem"><a href="colmeia/03-experimentacao/README.md">Documentação →</a></p>
+      </div>
+      <div class="card">
+        <span class="favo-pill f04">04</span>
+        <h3>Construção</h3>
+        <p>Spec, código, review, CI/CD e rollout canário.</p>
+        <p style="margin-top:0.5rem"><a href="colmeia/04-construcao/README.md">Documentação →</a></p>
+      </div>
+      <div class="card">
+        <span class="favo-pill f05">05</span>
+        <h3>Operação</h3>
+        <p>Métricas, incidentes (ERT) e loop para discovery.</p>
+        <p style="margin-top:0.5rem"><a href="colmeia/05-operacao/README.md">Documentação →</a></p>
+      </div>
+      <div class="card">
+        <span class="favo-pill f00">∅</span>
+        <h3>Transversal</h3>
+        <p>Orquestração, handoffs, grill-me e governança.</p>
+        <p style="margin-top:0.5rem"><a href="colmeia/00-nucleo/ciclo-completo.md">Ciclo completo →</a></p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Referência rápida</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Núcleo</h3>
+        <ul style="margin-top:0.5rem;padding-left:1.2rem;color:var(--muted);font-size:0.92rem">
+          <li><a href="colmeia/00-nucleo/catalogo-skills.md">Catálogo de skills</a></li>
+          <li><a href="colmeia/00-nucleo/ciclo-completo.md">Ciclo completo (diagrama)</a></li>
+          <li><a href="colmeia/00-nucleo/grill-me.md">Grill-me (revisor crítico)</a></li>
+          <li><a href="colmeia/00-nucleo/modelo-experimentacao-discovery.md">Validação 02/03/04</a></li>
+          <li><a href="AGENTS.md">AGENTS.md</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Configuração</h3>
+        <ul style="margin-top:0.5rem;padding-left:1.2rem;color:var(--muted);font-size:0.92rem">
+          <li><a href="colmeia/_config/okr-plataforma.md">Plataforma OKR</a></li>
+          <li><a href="colmeia/_config/discovery-tools.md">Tools discovery (VOC, analytics)</a></li>
+          <li><a href="colmeia/_config/construcao-monorepo.md">Monorepo, CI/CD</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert alert-info" style="margin-top:2rem">
+      <strong>GitHub Pages:</strong> esta documentação é publicada a partir da pasta <code>docs/</code>.
+      Execute <code>bash scripts/build-docs-site.sh</code> antes do push para incluir o espelho da colmeia.
+    </div>
+  </main>
+
+  <footer>
+    Ciclo de Produtação Digital · Framework de skills Devin CLI · Documentação v1.0
+  </footer>
+
+</body>
+</html>

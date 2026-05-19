@@ -1,0 +1,31 @@
+# Saídas de execução do ciclo (geradas pelas skills em runtime)
+colmeia/**/_iniciativas/**/*
+!colmeia/**/_iniciativas/**/README.md
+!colmeia/**/_iniciativas/**/.gitkeep
+colmeia/_handoffs/*
+!colmeia/_handoffs/README.md
+!colmeia/_handoffs/.gitkeep
+colmeia/_grill/*
+!colmeia/_grill/README.md
+!colmeia/_grill/.gitkeep
+
+# Devin CLI — segredos locais
+.devin/config.local.json
+
+# Build docs (gerado por scripts/build-docs-site.sh — CI gera no deploy)
+docs/colmeia/
+docs/AGENTS.md
+docs/_site-meta.json
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Env e segredos
+.env
+.env.*
+!.env.example

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Head de Produto × Devin CLI — Ciclo Go-to-Market</title>
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --surface: #12151c;
+      --surface2: #1a1f2a;
+      --border: #2a3344;
+      --text: #eef1f6;
+      --muted: #8b95a8;
+      --head: #4f8cff;
+      --head-dim: rgba(79, 140, 255, 0.14);
+      --devin: #3ecf8e;
+      --devin-dim: rgba(62, 207, 142, 0.12);
+      --grill: #ff6b4a;
+      --grill-dim: rgba(255, 107, 74, 0.18);
+      --gate: #a78bfa;
+      --f01: #4f8cff;
+      --f02: #7c6cf0;
+      --f03: #f0b429;
+      --f04: #3ecf8e;
+      --f05: #ff7b72;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    header {
+      padding: 2.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 1400px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(79,140,255,0.06) 0%, transparent 100%);
+    }
+    header h1 { font-size: 1.85rem; font-weight: 650; letter-spacing: -0.03em; }
+    header .subtitle { color: var(--muted); margin-top: 0.6rem; max-width: 56rem; }
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
+      margin-top: 1.5rem; font-size: 0.82rem; color: var(--muted);
+    }
+    .legend span { display: flex; align-items: center; gap: 0.45rem; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; }
+    main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+    /* Swimlanes overview */
+    .lanes-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 900px) { .lanes-intro { grid-template-columns: 1fr; } }
+    .lane-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      background: var(--surface);
+    }
+    .lane-card.head { border-color: rgba(79,140,255,0.35); background: var(--head-dim); }
+    .lane-card.devin { border-color: rgba(62,207,142,0.35); background: var(--devin-dim); }
+    .lane-card.grill { border-color: rgba(255,107,74,0.4); background: var(--grill-dim); }
+    .lane-card h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .lane-card.head h3 { color: var(--head); }
+    .lane-card.devin h3 { color: var(--devin); }
+    .lane-card.grill h3 { color: var(--grill); }
+    .lane-card p { font-size: 0.88rem; color: var(--muted); }
+
+    /* Phase blocks */
+    .phase {
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .phase-header {
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-num {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem;
+    }
+    .phase-title h2 { font-size: 1.1rem; font-weight: 600; }
+    .phase-title span { font-size: 0.82rem; color: var(--muted); }
+
+    .flow-track {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+  .step-row {
+      display: grid;
+      grid-template-columns: 28% 44% 28%;
+      gap: 0.75rem;
+      align-items: stretch;
+      min-height: 4rem;
+    }
+    @media (max-width: 1000px) {
+      .step-row { grid-template-columns: 1fr; }
+    }
+
+    .cell {
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.84rem;
+      border: 1px solid transparent;
+    }
+    .cell-head {
+      background: var(--head-dim);
+      border-color: rgba(79,140,255,0.25);
+    }
+    .cell-devin {
+      background: var(--devin-dim);
+      border-color: rgba(62,207,142,0.25);
+    }
+    .cell-grill {
+      background: var(--grill-dim);
+      border-color: rgba(255,107,74,0.35);
+    }
+    .cell-empty {
+      background: transparent;
+      border: 1px dashed var(--border);
+      opacity: 0.35;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    .cell-grill.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .cell-head .label { color: var(--head); }
+    .cell-devin .label { color: var(--devin); }
+    .cell-grill .label { color: var(--grill); }
+
+    code {
+      font-family: ui-monospace, "Cascadia Code", monospace;
+      font-size: 0.8em;
+      background: rgba(0,0,0,0.35);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+    .bubble {
+      font-style: italic;
+      color: var(--text);
+      opacity: 0.92;
+      margin-top: 0.25rem;
+    }
+    .verdict {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      margin-top: 0.35rem;
+    }
+    .v-ok { background: rgba(62,207,142,0.2); color: #3ecf8e; }
+    .v-refine { background: rgba(240,180,41,0.2); color: #f0b429; }
+    .v-block { background: rgba(255,107,74,0.25); color: #ff6b4a; }
+
+    .arrow-between {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.1rem;
+      padding: 0.15rem 0;
+    }
+
+    .gate-banner {
+      text-align: center;
+      padding: 0.6rem;
+      background: rgba(167,139,250,0.12);
+      border-top: 1px solid rgba(167,139,250,0.3);
+      color: var(--gate);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Macro diagram */
+    .macro {
+      margin: 2rem 0 3rem;
+      padding: 1.5rem;
+      background: var(--surface2);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    .macro-flow {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-width: 1100px;
+      padding: 0.5rem 0;
+    }
+    .macro-node {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .macro-arrow { color: var(--muted); font-size: 0.9rem; }
+    .macro-grill {
+      padding: 0.35rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      background: var(--grill-dim);
+      color: var(--grill);
+      border: 1px dashed rgba(255,107,74,0.5);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+    }
+    a { color: var(--head); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Head de Produto × Devin CLI</h1>
+    <p class="subtitle">
+      Fluxo ponta-a-ponta do modelo <strong>Go-to-Market</strong>: o Head conversa com o Devin CLI invocando skills;
+      o <strong>grill-me</strong> interrompe em cada decisão com perguntas difíceis — especialmente sobre hipóteses —
+      antes de avançar para deploy, testes com clientes reais ou construção.
+    </p>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--head)"></span> Head de Produto (Go-to-Market)</span>
+      <span><span class="swatch" style="background:var(--devin)"></span> Devin CLI — skills & subagentes</span>
+      <span><span class="swatch" style="background:var(--grill)"></span> grill-me — adversário crítico</span>
+      <span><span class="swatch" style="background:var(--gate)"></span> Gate</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="lanes-intro">
+      <div class="lane-card head">
+        <h3>Head de Produto</h3>
+        <p>Dono da iniciativa. Define diretriz, responde ao grill-me, aprova gates, fornece dados reais (métricas, VOC). Não delega decisão a subagentes.</p>
+      </div>
+      <div class="lane-card devin">
+        <h3>Devin CLI</h3>
+        <p>Executa skills (<code>/visao-cliente</code>, <code>/gerar-hipoteses</code>…). Subagentes são <em>tools</em> (VOC, analytics, SVM, Figma). Artefatos em <code>colmeia/*/_iniciativas/{id}/</code>.</p>
+      </div>
+      <div class="lane-card grill">
+        <h3>grill-me</h3>
+        <p><code>/grill-me {id} {momento}</code> — não constrói produto. Emite veredito <span class="verdict v-ok">APROVAR</span> <span class="verdict v-refine">REFINAR</span> <span class="verdict v-block">BLOQUEAR</span>. Obrigatório em hipóteses e gates.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 style="font-size:1.15rem;margin-bottom:1rem;">Macrofluxo do ciclo</h2>
+      <div class="macro">
+        <div class="macro-flow">
+          <span class="macro-node" style="background:rgba(79,140,255,0.2);color:var(--f01)">01 OKR</span>
+          <span class="macro-grill">grill×3</span>
+          <span class="macro-arrow">→</span>
+          <span class="macro-node" style="background:rgba(124,108,240,0.2);color:var(--f02)">02 Discovery</span>
+          <span class="macro-grill">grill×6</span>
+          <span class="macro-arrow">→</span>
+          <span class="macro-node" style="background:rgba(240,180,41,0.15);color:var(--f03)">03 Teste real</span>
+          <span class="macro-grill">grill×3</span>
+          <span class="macro-arrow">→</span>
+          <span class="macro-node" style="background:rgba(62,207,142,0.15);color:var(--f04)">04 Construção</span>
+          <span class="macro-grill">grill×2</span>
+          <span class="macro-arrow">→</span>
+          <span class="macro-node" style="background:rgba(255,123,114,0.15);color:var(--f05)">05 Operação</span>
+          <span class="macro-grill">grill×2</span>
+          <span class="macro-arrow">↺</span>
+          <span class="macro-node" style="background:rgba(124,108,240,0.2);color:var(--f02)">02</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- F01 -->
+    <article class="phase">
+      <div class="phase-header">
+        <div class="phase-num" style="background:rgba(79,140,255,0.2);color:var(--f01)">01</div>
+        <div class="phase-title">
+          <h2>Contexto Estratégico — OKR na Plataforma</h2>
+          <span>baseline · target · roof · moonshot · cascata L0→L4</span>
+        </div>
+      </div>
+      <div class="flow-track">
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div><code>/orquestrar-producao {id}</code><p class="bubble">"Iniciar ciclo trimestral para a iniciativa X."</p></div>
+          <div class="cell cell-devin"><div class="label">Devin</div>Plano de skills + lacunas <code>[FORNECER]</code></div>
+          <div class="cell cell-empty">—</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Fornece diretriz + baselines<p class="bubble">"Pull da plataforma e draft do OKR L3."</p></div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/sync-okr-plataforma pull</code> → <code>/draft-okr</code></div>
+          <div class="cell cell-empty">—</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Responde perguntas do grill</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/grill-me {id} okr-draft</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"Este KR move em 90 dias? O que provaria que está errado?"<br><span class="verdict v-refine">REFINAR</span> ou <span class="verdict v-ok">APROVAR</span></div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Ajusta se REFINAR</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/desdobrar-okr</code> → <code>/grill-me okr-cascata</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"Filho contribui 40% ao pai — de onde veio o peso?"</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Aprova Gate 01 após grill</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/auditar-okr</code> → <code>/grill-me gate-01</code> → <code>/sync-okr push</code> → <code>/curar-contexto 01 02</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"Pronto para discovery ou ainda narrativa estratégica sem dado?"</div>
+        </div>
+      </div>
+      <div class="gate-banner">GATE 01 — OKR publicado na Plataforma</div>
+    </article>
+
+    <!-- F02 -->
+    <article class="phase">
+      <div class="phase-header">
+        <div class="phase-num" style="background:rgba(124,108,240,0.2);color:var(--f02)">02</div>
+        <div class="phase-title">
+          <h2>Discovery — três visões → hipóteses → SVM → Figma → feature</h2>
+          <span>Head GTM orquestra; subagentes = tools de VOC, analytics, personas sintéticas</span>
+        </div>
+      </div>
+      <div class="flow-track">
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>"Construir visões ancoradas no KR-3.2."</div>
+          <div class="cell cell-devin"><div class="label">Devin (paralelo)</div><code>/visao-mercado</code> · <code>/visao-produto</code> · <code>/visao-cliente</code><br><small>sub: market-researcher, product-analytics, voc-analyst</small></div>
+          <div class="cell cell-empty">—</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Revisa oportunidades priorizadas</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/sintetizar-visoes</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div><code>/grill-me oportunidades</code><br>"O1 aparece em mercado+produto+cliente no mesmo segmento?"</div>
+        </div>
+        <div class="arrow-between">↓ <strong style="color:var(--grill)">decisão crítica</strong></div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Defende ou revisa cada hipótese</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/gerar-hipoteses</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div><code>/grill-me hipoteses</code> — <strong>≥8 perguntas</strong><br>"Intervenção ≠ desejo. O que falsifica esta hipótese?"<br><span class="verdict v-block">BLOQUEAR</span> se GRILL-HIP-01/02</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Não confundir sintético com real</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/testar-svm</code> → personas sintéticas</div>
+          <div class="cell cell-grill"><div class="label">grill-me</div><code>/grill-me svm</code><br>"Strong veio do LLM ou das 3 visões? Marcou [SINTÉTICO]?"</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Valida jornada tangível</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/prototipo-figma</code> → <code>/grill-me prototipo</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"Tela 4 sem hipotese_ref — por que existe?"</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Aprova pacote para teste com clientes</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/feature-stories</code> — histórias por valor + segmento</div>
+          <div class="cell cell-grill"><div class="label">grill-me</div><code>/grill-me feature</code> + <code>/grill-me gate-02</code></div>
+        </div>
+      </div>
+      <div class="gate-banner">GATE 02 — feature candidata (validacao_real: pendente) → handoff 02→03</div>
+    </article>
+
+    <!-- F03 -->
+    <article class="phase">
+      <div class="phase-header">
+        <div class="phase-num" style="background:rgba(240,180,41,0.15);color:var(--f03)">03</div>
+        <div class="phase-title">
+          <h2>Experimentação — teste com clientes reais</h2>
+          <span>SVM foi filtro barato; aqui é evidência real</span>
+        </div>
+      </div>
+      <div class="flow-track">
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Define experimento e executa com clientes</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/design-experimento</code> → <code>/grill-me experimento</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"Esta métrica responde à hipótese hip-2 ou mede vaidade?"</div>
+        </div>
+        <div class="arrow-between">↓ Head executa (protótipo Figma / fake door / AB…)</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Informa resultados numéricos</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/registrar-resultado</code> → <code>/decidir-experimento</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div><code>/grill-me decisao-exp</code> + <code>gate-03</code><br>"Scale com n=50 e p=0.06 — não é ruído?"</div>
+        </div>
+      </div>
+      <div class="gate-banner">GATE 03 — scale → 04 (validacao_real confirmada) | iterate/pivot/kill → 02</div>
+    </article>
+
+    <!-- F04 -->
+    <article class="phase">
+      <div class="phase-header">
+        <div class="phase-num" style="background:rgba(62,207,142,0.15);color:var(--f04)">04</div>
+        <div class="phase-title">
+          <h2>Construção SDD — spec → código → review-pr → CI/CD → rollout</h2>
+          <span>Head: <code>resumo-head.md</code> + validação canário · Produção por <code>commit_hash</code></span>
+        </div>
+      </div>
+      <div class="flow-track">
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Aprova spec funcional (o que o cliente vê)</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/spec-funcional</code> → <code>/grill-me spec-funcional</code><br><small>NFR + spec técnica + tarefas + implementar (invisível ao Head)</small></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>Cobertura das histórias?</div>
+        </div>
+        <div class="arrow-between">↓ Qualidade antes de deploy</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>—</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/review-pr</code> → <code>/grill-me gate-04-pre</code> → <code>/ci-validar</code> → <code>/grill-me ci</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>REPROVADO bloqueia CI (BLD-PR-01)</div>
+        </div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Segmento canário · valida KPIs (após CD prod)</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/prep-release</code> → <code>/cd-promover</code> → <code>/grill-me cd-homolog</code> → <code>/rollout-canario</code> → <code>/validar-rollout-head</code> → expandir ou <code>/rollout-rollback</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div><code>rollout-head</code> + <code>gate-04</code></div>
+        </div>
+      </div>
+      <div class="gate-banner">GATE 04 — review-pr + CI verde + CD hash + Head validou canário</div>
+    </article>
+
+    <!-- F05 -->
+    <article class="phase">
+      <div class="phase-header">
+        <div class="phase-num" style="background:rgba(255,123,114,0.15);color:var(--f05)">05</div>
+        <div class="phase-title">
+          <h2>Operação — métricas e loop de aprendizado</h2>
+          <span>Insights voltam às visões de Produto e Cliente</span>
+        </div>
+      </div>
+      <div class="flow-track">
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Notificado em sev1</div>
+          <div class="cell cell-devin"><div class="label">ERT (IA)</div><code>/ert-abrir</code> → comandar · registrar · comunicar · diagnosticar 360°</div>
+          <div class="cell cell-empty">—</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Fornece valores atuais dos KRs</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/review-metricas</code> → <code>/grill-me metricas</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"KR subiu 2pp — aprendizado ou sazonalidade?"</div>
+        </div>
+        <div class="arrow-between">↓</div>
+        <div class="step-row">
+          <div class="cell cell-head"><div class="label">Head</div>Prioriza insights para novo ciclo</div>
+          <div class="cell cell-devin"><div class="label">Devin</div><code>/insight-para-discovery</code> → <code>/grill-me insights</code> → <code>/visao-produto</code> ou <code>/visao-cliente</code></div>
+          <div class="cell cell-grill"><div class="label">grill-me</div>"Este insight muda hipótese ou é curiosidade?"</div>
+        </div>
+        <div class="step-row">
+          <div class="cell cell-grill full-width"><div class="label">Loop</div>↺ Retorna ao favo 02 — Head reinicia discovery com evidência operacional fresca</div>
+        </div>
+      </div>
+    </article>
+
+    <section style="margin-top:2rem;padding:1.25rem;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+      <h2 style="font-size:1rem;margin-bottom:0.75rem;color:var(--grill)">Regra de ouro — grill-me</h2>
+      <p style="color:var(--muted);font-size:0.9rem;max-width:52rem">
+        Nenhuma hipótese vira protótipo sem <code>/grill-me hipoteses</code> ≠ BLOQUEAR.
+        Nenhum gate fecha sem grill do momento <code>gate-NN</code>.
+        O Head <strong>responde na sessão</strong> — o Devin não avança sozinho após um BLOQUEAR.
+        Saídas em <code>colmeia/_grill/{id}/</code>.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Framework Ciclo de Produtação · <a href="fluxo-producao.html">Visão técnica completa</a> ·
+    <a href="../colmeia/00-nucleo/grill-me.md">Contrato grill-me</a>
+  </footer>
+</body>
+</html>
