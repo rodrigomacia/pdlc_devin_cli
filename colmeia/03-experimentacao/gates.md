@@ -20,6 +20,7 @@ versao: 2.0
 - [ ] **G3.G1** `/grill-me experimento` ≠ BLOQUEAR
 - [ ] **G3.G2** `/grill-me decisao-exp` ≠ BLOQUEAR
 - [ ] **G3.G3** `/grill-me gate-03` registrado
+- [ ] **G3.REG** `registro-decisoes-grill.yaml` — **100%** experimentos do backlog + hipóteses ligadas com decisão (`scale`/`iterate`/`kill`/`defer`) e motivadores
 
 ## Códigos
 
@@ -30,6 +31,8 @@ versao: 2.0
 | EXP-03 | Scale sem evidência mínima |
 | EXP-04 | Scale sem `validacao_real: confirmada` na feature |
 | GOV-01 | Governança pendente |
+| GRILL-REG-01 | Registro incompleto pós grill |
+| GRILL-REG-02 | Kill/defer sem motivadores_nao_continuar |
 
 ## Decisões
 

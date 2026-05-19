@@ -17,6 +17,7 @@ permissions:
 ---
 
 @colmeia/00-nucleo/grill-me.md
+@colmeia/00-nucleo/modelo-registro-decisoes-grill.md
 @colmeia/02-discovery/modelo-discovery.md
 @colmeia/01-contexto-estrategico/modelo-okr.md
 
@@ -91,19 +92,21 @@ Se artefato ausente → veredito `BLOQUEAR` + skill sugerida para produzir.
 - Decisão sustentada por número fornecido pelo operador (não inventado)?
 - Risco de confundir correlação com causalidade?
 
-## 3. Output
+## 3. Output grill
 
-Escrever `colmeia/_grill/$1/grill-$2-{YYYYMMDD}.md` com template de `grill-me.md`:
+Escrever `colmeia/_grill/$1/grill-$2-{YYYYMMDD}.md` com template de `grill-me.md`.
 
-- Veredito
-- Perguntas (numeradas)
-- Lacunas
-- Contradições
-- Decisões para o Head
-- Skills sugeridas se REFINAR/BLOQUEAR
+## 4. Registro de decisões (obrigatório — 100%)
 
-## 4. Parar e aguardar
+Após respostas do Head na sessão, atualizar `colmeia/_grill/$1/registro-decisoes-grill.yaml`:
 
-Após escrever o grill, **parar**. O Head responde na sessão Devin CLI antes da próxima skill.
+1. Listar **todos** os itens do conjunto do momento (ver tabela em `modelo-registro-decisoes-grill.md`).
+2. Por item: `decisao` + `motivadores_continuar` e/ou `motivadores_nao_continuar` (nunca vazios os dois se decisão definida).
+3. Hipóteses `desconsiderar` → atualizar `hipoteses.yaml`: `decisao_pos_grill`, `status: descartada`, `registro_grill_ref`.
+4. Validar cobertura — se faltar item → veredito `REFINAR` + **GRILL-REG-01**.
 
-Não executar skills downstream automaticamente.
+Momentos com cobertura 100% obrigatória: `hipoteses`, `oportunidades`, `svm`, `feature`, `decisao-exp`, `gate-02`, `gate-03`.
+
+## 5. Parar e aguardar
+
+Após grill + registro, **parar**. Não executar skills downstream automaticamente.

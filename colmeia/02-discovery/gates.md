@@ -44,6 +44,7 @@ Validado pelo **Head de Produto (Go-to-Market)**. Aprovação única — sem com
 - [ ] **G2.G1** `/grill-me {id} hipoteses` — veredito ≠ `BLOQUEAR`
 - [ ] **G2.G2** `/grill-me {id} feature` — veredito ≠ `BLOQUEAR`
 - [ ] **G2.G3** `/grill-me {id} gate-02` — veredito registrado em `gate-02-registro.md`
+- [ ] **G2.REG** `registro-decisoes-grill.yaml` — **100%** hipóteses em `hipoteses.yaml` com decisão + motivadores após grills `hipoteses`, `svm`, `feature` (nenhum item sem linha; desconsideradas com `motivadores_nao_continuar`)
 
 ### Condicional
 - [ ] **G2.R1** `/governanca-check` se política exigir
@@ -63,6 +64,9 @@ Validado pelo **Head de Produto (Go-to-Market)**. Aprovação única — sem com
 | DIS-STORY-01 | História sem valor/segmento |
 | DIS-STORY-02 | História com decisão técnica embutida |
 | GOV-01 | Governança pendente |
+| GRILL-REG-01 | Registro sem cobertura 100% dos itens |
+| GRILL-REG-02 | Desconsiderar sem motivadores_nao_continuar |
+| GRILL-REG-03 | Continuar/scale sem motivadores_continuar |
 
 ## Aprovador
 

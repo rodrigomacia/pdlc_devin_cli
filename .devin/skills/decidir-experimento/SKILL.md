@@ -18,6 +18,7 @@ permissions:
 @colmeia/03-experimentacao/gates.md
 @colmeia/03-experimentacao/artefatos.md
 @colmeia/00-nucleo/modelo-experimentacao-discovery.md
+@colmeia/00-nucleo/modelo-registro-decisoes-grill.md
 
 ID: **$ARGUMENTS**
 
@@ -30,5 +31,6 @@ ID: **$ARGUMENTS**
    - Recomendar: `/curar-contexto 03 02 $ARGUMENTS` + skills favo 02 indicadas
    - **Não** handoff 03→04
 5. Parecer Gate 03 + `/grill-me $ARGUMENTS decisao-exp` + `/grill-me $ARGUMENTS gate-03`
+6. Garantir que `/grill-me decisao-exp` registra **100%** hipóteses/experimentos em `registro-decisoes-grill.yaml` com motivadores
 
-Decisões: scale, iterate, pivot, kill, defer
+Decisões: scale, iterate, pivot, kill, defer — cada uma com motivadores no registro

@@ -10,6 +10,7 @@ Framework de skills — ciclo **01 → 05** completo.
 | [ciclo-completo.md](./ciclo-completo.md) | Diagrama e handoffs |
 | [modelo-experimentacao-discovery.md](./modelo-experimentacao-discovery.md) | Dupla validação 02 / 03 / 04 |
 | [grill-me.md](./grill-me.md) | Adversário em cada decisão |
+| [modelo-registro-decisoes-grill.md](./modelo-registro-decisoes-grill.md) | 100% hipóteses — decisão e motivadores pós grill |
 | [modelo-colmeia.md](./modelo-colmeia.md) | Estrutura favo + runtime |
 | [devin-cli.md](./devin-cli.md) | Paths `.devin/` |
 
@@ -31,4 +32,4 @@ Framework de skills — ciclo **01 → 05** completo.
 
 ## Runtime (gitignored)
 
-`colmeia/*/_iniciativas/{id}/` · `colmeia/_handoffs/` · `colmeia/_grill/{id}/`
+`colmeia/*/_iniciativas/{id}/` · `colmeia/_handoffs/` · `colmeia/_grill/{id}/` (incl. `registro-decisoes-grill.yaml`)

@@ -104,10 +104,10 @@ ERT: [modelo-ert.md](../05-operacao/modelo-ert.md) — operação 100% IA, visã
 
 | Comando | Entrada | Saída | Agent |
 |---------|---------|-------|-------|
-| `/grill-me {id} {momento}` | Artefato da etapa anterior | Perguntas + veredito APROVAR/REFINAR/BLOQUEAR | `grill-me` ⊂ |
+| `/grill-me {id} {momento}` | Artefato da etapa anterior | Perguntas + veredito + `registro-decisoes-grill.yaml` (100% itens) | `grill-me` ⊂ |
 | `/governanca-check {id} {favo}` | `_config/governanca.md` opcional | Checklist | `guardiao-governanca` ⊂ |
 
-**Grill-me — momentos:** … · `spec-funcional` · `tarefas` · `pipeline` · `rollout-head` · `release` · `gate-04` · … Ver [grill-me.md](./grill-me.md).
+**Grill-me — momentos:** … · `spec-funcional` · `tarefas` · `pipeline` · `rollout-head` · `release` · `gate-04` · … Ver [grill-me.md](./grill-me.md) · Registro 100%: [modelo-registro-decisoes-grill.md](./modelo-registro-decisoes-grill.md).
 
 ## Matriz Skill → Gate
 

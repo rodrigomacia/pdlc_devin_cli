@@ -26,6 +26,8 @@ Ver `colmeia/00-nucleo/catalogo-skills.md`.
 
 `/grill-me {id} {momento}` — adversário crítico **antes de cada decisão**. Obrigatório em hipóteses, feature e gates. Mapa: `colmeia/00-nucleo/grill-me.md`.
 
+**Registro 100%:** após cada grill, `colmeia/_grill/{id}/registro-decisoes-grill.yaml` documenta **todas** as hipóteses/itens com decisão (continuar ou desconsiderar) e motivadores. Modelo: `colmeia/00-nucleo/modelo-registro-decisoes-grill.md`. Gates **G2.REG** / **G3.REG**.
+
 ## Config opcional
 
 - `colmeia/_config/governanca.md` para `/governanca-check`

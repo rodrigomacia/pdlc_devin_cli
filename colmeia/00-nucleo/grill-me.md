@@ -1,6 +1,6 @@
 ---
 favo: 00-nucleo
-versao: 1.0
+versao: 1.1
 status: estavel
 tags: [grill-me, adversario, decisao, transversal]
 skill: grill-me
@@ -20,6 +20,19 @@ O **grill-me** é o *devil's advocate* do ciclo. Não produz produto — **inter
 | Pode ser opcional | **Obrigatório** nos momentos mapeados abaixo |
 
 O Head responde às perguntas na sessão Devin CLI. Sem resposta satisfatória → veredito `REFINAR` ou `BLOQUEAR`.
+
+## Registro de decisões (obrigatório)
+
+Após cada grill, **100% dos itens** interrogados devem constar em `colmeia/_grill/{id}/registro-decisoes-grill.yaml` com decisão e motivadores (continuar **e/ou** não continuar).
+
+Modelo completo: [modelo-registro-decisoes-grill.md](./modelo-registro-decisoes-grill.md)
+
+| Regra | Descrição |
+|-------|-----------|
+| **Nada some** | Hipótese desconsiderada permanece no yaml com `decisao_pos_grill: desconsiderar` |
+| **Motivo obrigatório** | `desconsiderar` / `kill` exige `motivadores_nao_continuar` |
+| **Motivo para seguir** | `continuar` / `scale` exige `motivadores_continuar` |
+| **Cobertura** | Contagem de itens no registro = contagem no artefato-fonte |
 
 ## Comando
 
@@ -82,6 +95,15 @@ APROVAR | REFINAR | BLOQUEAR
 
 ## Skills sugeridas se REFINAR/BLOQUEAR
 - `/...` — motivo
+
+## Registro de decisões (esta sessão)
+> Preenchido em `registro-decisoes-grill.yaml` — ver entrada `{momento}`.
+
+| item_id | tipo | decisão | resumo motivadores |
+|---------|------|---------|-------------------|
+| {H1} | hipotese | continuar \| desconsiderar \| adiar \| iterar | … |
+
+Itens sem linha → **GRILL-REG-01** (bloquear gate).
 ```
 
 ## Vereditos
@@ -107,6 +129,10 @@ O grill-me **não substitui** o Head. Mesmo com `APROVAR`, o Head pode discordar
 | GRILL-SCOPE-01 | Escopo além do que evidência suporta |
 | GRILL-SEG-01 | Generalização sem segmento |
 | GRILL-CONTRA-01 | Contradição entre visões/artefatos |
+| GRILL-REG-01 | Item ausente no registro (cobertura incompleta) |
+| GRILL-REG-02 | Desconsiderar/kill sem motivadores_nao_continuar |
+| GRILL-REG-03 | Continuar/scale sem motivadores_continuar |
+| GRILL-REG-04 | Registro contradiz artefato downstream |
 
 ## Tom do agente
 
@@ -127,3 +153,5 @@ O grill-me **não substitui** o Head. Mesmo com `APROVAR`, o Head pode discordar
 | 05 | `metricas`, `insights` (quando loop → 02) |
 
 Registro do veredito pode ser copiado para `gate-{NN}-registro.md` na seção "Grill-me".
+
+**Obrigatório nos gates 02 e 03:** anexar ou referenciar `registro-decisoes-grill.yaml` — checklist **G2.REG** / **G3.REG**.

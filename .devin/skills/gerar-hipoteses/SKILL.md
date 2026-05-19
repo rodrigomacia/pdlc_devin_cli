@@ -26,7 +26,8 @@ ID: **$ARGUMENTS**
    > Acreditamos que [intervenção] para [segmento] resultará em [mudança em KR/KPI]
    > porque [insight das visões]. Saberemos quando [sinal mensurável].
 
-3. Cada hipótese carrega: `hipotese_id`, `oportunidade_ref`, `enunciado`, `segmento`, `kr_ref`, `risco` (valor/usabilidade/viabilidade/factibilidade/regulatorio), `confianca`, `status: nova`
+3. Cada hipótese carrega: `hipotese_id`, `oportunidade_ref`, `enunciado`, `segmento`, `kr_ref`, `risco`, `confianca`, `status: nova`, `decisao_pos_grill: pendente`, `registro_grill_ref: null`
 4. Escrever em `colmeia/02-discovery/_iniciativas/$1/hipoteses.yaml` (template em `artefatos.md`)
-5. Sem evidência da síntese para uma hipótese → não gerar
-6. **Parar.** Próximo passo obrigatório: `/grill-me $1 hipoteses` — não avançar para SVM sem veredito ≠ BLOQUEAR
+5. Sem evidência da síntese para uma hipótese → não gerar (se descartada na síntese, registrar em `oportunidades.md` como despriorizada com motivo — não em hipoteses.yaml)
+6. Se `registro-decisoes-grill.yaml` não existir, criar esqueleto em `colmeia/_grill/$1/` (ver `modelo-registro-decisoes-grill.md`)
+7. **Parar.** Próximo: `/grill-me $1 hipoteses` — preenche registro 100% + não avançar SVM sem veredito ≠ BLOQUEAR

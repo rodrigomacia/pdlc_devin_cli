@@ -173,8 +173,52 @@ hipoteses:
     kr_ref: {kr_id}
     risco: [valor, usabilidade, viabilidade, factibilidade, regulatorio]
     confianca: alta | media | baixa
-    status: nova | em-svm | strong | iterate | kill
+    status: nova | em-svm | strong | iterate | kill | descartada
     svm_ref: null
+    decisao_pos_grill: pendente | continuar | desconsiderar | adiar | iterar
+    registro_grill_ref: null
+```
+
+> Hipótese **desconsiderada** permanece no arquivo — motivadores em `registro-decisoes-grill.yaml`.
+
+## registro-decisoes-grill.yaml
+
+Path: `colmeia/_grill/{id}/registro-decisoes-grill.yaml` (atualizado a cada `/grill-me`).
+
+Modelo: [../00-nucleo/modelo-registro-decisoes-grill.md](../00-nucleo/modelo-registro-decisoes-grill.md)
+
+```yaml
+iniciativa: {id}
+versao: 1
+entradas:
+  - entrada_id: grill-hipoteses-2026-05-18
+    momento: hipoteses
+    grill_ref: colmeia/_grill/{id}/grill-hipoteses-20260518.md
+    data: {ISO-8601}
+    decisor_final: head
+    itens:
+    - item_id: hip-1
+      tipo: hipotese
+      decisao: continuar | desconsiderar | adiar | iterar
+      motivadores_continuar:
+        - tipo: evidencia
+          fonte: visao-produto
+          referencia: visao-produto.md#funil
+          descricao: drop 62% na tela CET — intervenção direta no KR1
+      motivadores_nao_continuar: []
+    - item_id: hip-2
+      tipo: hipotese
+      decisao: desconsiderar
+      motivadores_continuar: []
+      motivadores_nao_continuar:
+        - tipo: grill
+          fonte: grill-hipoteses
+          referencia: GRILL-WISH-01
+          descricao: confiança alta sem 3 visões — risco wishful thinking
+        - tipo: head
+          fonte: sessao
+          referencia: gate-02
+          descricao: Head adia pré-aprovação 90s para ciclo futuro
 ```
 
 ## personas-sinteticas.yaml
