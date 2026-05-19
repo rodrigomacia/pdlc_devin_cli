@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#06070d" />
-  <title>Guia de início — PDLC</title>
+  <title>Como começar — Head de Produto · PDLC</title>
   <link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
@@ -15,88 +15,137 @@
     <button class="nav-toggle" type="button" aria-label="Menu">☰</button>
     <nav class="site-nav">
       <a href="guia-inicio.html">Começar</a>
-      <a href="configuracao.html">Configurar</a>
+      <a href="configuracao.html">Configurar (TI)</a>
       <a href="catalogo-skills.html">Skills</a>
       <a href="apresentacao-executiva.html">Executivo</a>
       <a href="https://github.com/rodrigomacia/pdlc_devin_cli" target="_blank" rel="noopener">GitHub</a>
-      <a href="guia-inicio.html" class="nav-cta">Iniciar →</a>
     </nav>
   </header>
 
   <main>
-    <p class="breadcrumb"><a href="index.html">Início</a> / Guia de início</p>
+    <p class="breadcrumb"><a href="index.html">Início</a> / Como começar</p>
 
     <div class="page-hero">
-      <h1>Guia de início rápido</h1>
-      <p>Do zero à primeira iniciativa — Devin CLI como orquestrador multi-agente do ciclo completo.</p>
+      <h1>Como começar — Head de Produto</h1>
+      <p>Passo a passo em linguagem de negócio. Sem código, sem jargão de desenvolvedor.</p>
     </div>
 
-    <h2 class="section-title">Pré-requisitos</h2>
-    <ul style="padding-left:1.25rem;color:var(--text-secondary);margin-bottom:1.5rem">
-      <li><strong>Devin CLI</strong> — <a href="https://cli.devin.ai" target="_blank" rel="noopener">cli.devin.ai</a></li>
-      <li>Clone do <a href="https://github.com/rodrigomacia/pdlc_devin_cli">repositório</a></li>
-      <li>MCP: OKR, VOC, analytics (ver configuração)</li>
-      <li>ID de iniciativa (ex. <code>conta-digital-q3-2026</code>)</li>
-    </ul>
+    <div class="alert alert-info reveal">
+      <strong>Preciso clonar o repositório?</strong><br />
+      <strong>No dia a dia: não.</strong> Você só abre o Devin na pasta que a TI já preparou.
+      Baixar o projeto (clone) é <strong>uma vez</strong> — no setup inicial, feito por TI ou com apoio dela.
+    </div>
 
-    <h2 class="section-title">Passo a passo</h2>
-    <ol class="steps">
+    <div class="section-head reveal">
+      <p class="label">Duas fases</p>
+      <h2>Quem faz o quê</h2>
+    </div>
+
+    <div class="grid grid-2 reveal">
+      <div class="card">
+        <span class="tag tag-tech">Uma vez · TI ou plataforma</span>
+        <h3>Preparar o ambiente</h3>
+        <p>Instalar Devin, baixar o projeto, conectar OKR e ferramentas de dados. ~30–60 min.</p>
+        <a href="configuracao.html" style="font-size:0.88rem;margin-top:0.5rem;display:inline-block">Roteiro técnico para TI →</a>
+      </div>
+      <div class="card" style="border-color:rgba(0,229,184,0.35)">
+        <span class="tag tag-guide">Todo dia · Você (Head)</span>
+        <h3>Conduzir a iniciativa</h3>
+        <p>Abrir o Devin, conversar, fornecer dados de negócio e aprovar portões de decisão.</p>
+      </div>
+    </div>
+
+    <div class="section-head reveal">
+      <p class="label">Seu roteiro</p>
+      <h2>5 passos — só o que importa para você</h2>
+    </div>
+
+    <ol class="steps reveal">
       <li>
-        <strong>Execute o setup</strong><br />
-        <pre><code>git clone https://github.com/rodrigomacia/pdlc_devin_cli.git
-cd pdlc_devin_cli
-chmod +x scripts/*.sh
-./scripts/setup-devin-cli.sh</code></pre>
+        <strong>Abra o Devin</strong> na pasta do PDLC (a TI indica qual é — algo como <em>pdlc_devin_cli</em>).
       </li>
       <li>
-        <strong>Configure integrações</strong><br />
-        Preencha <code>colmeia/_config/</code> e <code>.devin/config.local.json</code>.
-        <a href="configuracao.html">Detalhes →</a>
+        <strong>Escolha um nome</strong> para sua iniciativa — curto, sem espaços.<br />
+        Exemplo: <code>conta-digital-q3-2026</code>
       </li>
       <li>
-        <strong>Abra o Devin</strong>
-        <pre><code>devin</code></pre>
-      </li>
-      <li>
-        <strong>Orquestre</strong>
+        <strong>Digite na conversa:</strong>
         <pre><code>/orquestrar-producao conta-digital-q3-2026</code></pre>
+        O assistente mostra em qual etapa você está e o próximo passo.
       </li>
       <li>
-        <strong>Siga o ciclo</strong> — forneça dados em <code>[FORNECER]</code>; use <code>/grill-me</code> antes de cada portão.
+        <strong>Responda quando pedir</strong> — metas, números, feedback de clientes, aprovações.
+        Se aparecer <code>[FORNECER]</code>, falta um dado seu; o assistente não inventa.
       </li>
       <li>
-        <strong>Handoffs</strong>
-        <pre><code>/curar-contexto 01 02 {id}
-/curar-contexto 02 03 {id}</code></pre>
+        <strong>Antes de cada decisão importante</strong>, o assistente pode questionar com
+        <code>/grill-me</code>. Responda com evidência — é o “advogado do diabo” do ciclo.
       </li>
     </ol>
 
-    <h2 class="section-title">Fluxo por favo</h2>
-    <table>
+    <div class="section-head reveal">
+      <p class="label">O ciclo em uma frase por etapa</p>
+      <h2>O que acontece em cada fase</h2>
+    </div>
+
+    <div class="favo-grid reveal">
+      <article class="favo-card">
+        <span class="favo-pill f01">1</span>
+        <h3>Contexto</h3>
+        <p>Você alinha OKRs e prioridade estratégica.</p>
+      </article>
+      <article class="favo-card">
+        <span class="favo-pill f02">2</span>
+        <h3>Descoberta</h3>
+        <p>Mercado, produto, cliente → hipóteses e protótipo candidato.</p>
+      </article>
+      <article class="favo-card">
+        <span class="favo-pill f03">3</span>
+        <h3>Experimentação</h3>
+        <p><strong>Você</strong> testa com clientes reais e informa o resultado.</p>
+      </article>
+      <article class="favo-card">
+        <span class="favo-pill f04">4</span>
+        <h3>Construção</h3>
+        <p>Você aprova o que o cliente verá; valida o lançamento gradual (canário).</p>
+      </article>
+      <article class="favo-card">
+        <span class="favo-pill f05">5</span>
+        <h3>Operação</h3>
+        <p>Métricas moveram? O que aprendemos para o próximo ciclo?</p>
+      </article>
+    </div>
+
+    <div class="section-head reveal">
+      <p class="label">Comandos que você mais usa</p>
+      <h2>Não precisa decorar tudo</h2>
+    </div>
+
+    <table class="reveal">
       <thead>
-        <tr><th>Favo</th><th>Head</th><th>Skills</th></tr>
+        <tr><th>Você digita</th><th>Quando</th></tr>
       </thead>
       <tbody>
-        <tr><td><span class="favo-pill f01">01</span></td><td>Valida OKRs</td><td><code>/draft-okr</code> · <code>/auditar-okr</code></td></tr>
-        <tr><td><span class="favo-pill f02">02</span></td><td>Discovery GTM</td><td><code>/visao-*</code> · <code>/feature-stories</code></td></tr>
-        <tr><td><span class="favo-pill f03">03</span></td><td>Teste real</td><td><code>/decidir-experimento</code></td></tr>
-        <tr><td><span class="favo-pill f04">04</span></td><td>Spec + canário</td><td><code>/review-pr</code> · <code>/validar-rollout-head</code></td></tr>
-        <tr><td><span class="favo-pill f05">05</span></td><td>Métricas</td><td><code>/insight-para-discovery</code></td></tr>
+        <tr><td><code>/orquestrar-producao {nome}</code></td><td>Começar o dia ou retomar — “onde estou?”</td></tr>
+        <tr><td><code>/grill-me {nome} …</code></td><td>Antes de aprovar uma etapa</td></tr>
+        <tr><td><code>/decidir-experimento {nome}</code></td><td>Depois dos testes com clientes</td></tr>
+        <tr><td><code>/validar-rollout-head {nome}</code></td><td>Validar métricas após canário em produção</td></tr>
       </tbody>
     </table>
 
-    <div class="alert alert-warn" style="margin-top:2rem">
-      <ul style="padding-left:1.2rem;margin:0;color:var(--text-secondary)">
-        <li>SVM ≠ cliente real (favo 02 vs 03)</li>
-        <li><code>/review-pr</code> antes de CI/CD</li>
-        <li>Scale exige <code>validacao_real: confirmada</code></li>
-      </ul>
+    <div class="alert alert-warn reveal" style="margin-top:2rem">
+      <strong>Lembrete:</strong> simulação com IA (etapa 2) não substitui teste com cliente real (etapa 3).
+      Só avance para construção em escala quando houver evidência de cliente.
     </div>
 
-    <p style="margin-top:2rem">
-      <a href="configuracao.html" class="btn btn-ghost">Configuração →</a>
-      <a href="catalogo-skills.html" class="btn btn-primary" style="margin-left:0.5rem">Catálogo skills →</a>
-    </p>
+    <div class="cta-band reveal" style="margin-top:2.5rem">
+      <h2>Quer o guia em Markdown?</h2>
+      <p>Versão para imprimir ou compartilhar com o time de produto.</p>
+      <div class="hero-actions" style="margin-bottom:0">
+        <a href="https://github.com/rodrigomacia/pdlc_devin_cli/blob/main/GUIA-HEAD.md" class="btn btn-primary" target="_blank" rel="noopener">GUIA-HEAD.md no GitHub</a>
+        <a href="fluxo-head-produto-devin.html" class="btn btn-ghost">Fluxo visual Head × Devin</a>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">

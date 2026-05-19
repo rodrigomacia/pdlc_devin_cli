@@ -32,43 +32,32 @@ Mapa: [`colmeia/00-nucleo/ciclo-completo.md`](colmeia/00-nucleo/ciclo-completo.m
 
 Catálogo: [`colmeia/00-nucleo/catalogo-skills.md`](colmeia/00-nucleo/catalogo-skills.md)
 
-## Setup Devin CLI
+## Como começar
 
-```bash
-chmod +x scripts/setup-devin-cli.sh scripts/build-docs-site.sh
-./scripts/setup-devin-cli.sh
-# Edite colmeia/_config/*.md e .devin/config.local.json
-devin
-/orquestrar-producao {id}
+### Head de Produto (não técnico)
+
+**Precisa clonar o repositório no dia a dia? Não.**  
+Abra o Devin na pasta que a TI preparou e comece por:
+
+```
+/orquestrar-producao {nome-da-sua-iniciativa}
 ```
 
-Documentação web: [`docs/index.html`](docs/index.html) · [GitHub Pages](docs/configuracao.html#github-pages)
+Guia completo em linguagem simples: **[GUIA-HEAD.md](GUIA-HEAD.md)** · [versão web](docs/guia-inicio.html)
 
-## Publicar no GitHub
+### Setup único (TI / primeira vez)
+
+Baixar o projeto **uma vez** e preparar conexões (OKR, analytics, VOC):
 
 ```bash
-# 1. Commit inicial (se ainda não fez)
-git init && git add -A && git status   # confira: config.local.json NÃO deve aparecer
-
-# Clone
 git clone https://github.com/rodrigomacia/pdlc_devin_cli.git
 cd pdlc_devin_cli
 ./scripts/setup-devin-cli.sh
 ```
 
-**Repositório:** [github.com/rodrigomacia/pdlc_devin_cli](https://github.com/rodrigomacia/pdlc_devin_cli)
+Detalhes: [docs/configuracao.html](docs/configuracao.html)
 
-Ative **Pages**: Settings → Pages → Source: **GitHub Actions**.  
-Site: `https://rodrigomacia.github.io/pdlc_devin_cli/`
-
-## Uso
-
-```bash
-/orquestrar-producao {id}
-# seguir skills indicadas; fornecer inputs na sessão
-```
-
-Outputs: `colmeia/*/_iniciativas/{id}/` (gitignored)
+**Site:** [rodrigomacia.github.io/pdlc_devin_cli](https://rodrigomacia.github.io/pdlc_devin_cli)
 
 ## Estrutura
 
