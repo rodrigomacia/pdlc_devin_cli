@@ -3,133 +3,223 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ciclo de Produtação Digital — framework multi-agente com Devin CLI para Go-to-Market ponta a ponta." />
-  <title>Ciclo de Produtação Digital — Documentação</title>
+  <meta name="description" content="PDLC — framework multi-agente de produtação digital com Devin CLI. Do OKR ao cliente em produção." />
+  <meta name="theme-color" content="#06070d" />
+  <title>PDLC · Ciclo de Produtação Digital</title>
   <link rel="stylesheet" href="assets/site.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2300e5b8' rx='20' width='100' height='100'/><text y='.9em' x='12' font-size='70'>⬡</text></svg>" />
 </head>
 <body>
+  <div class="hex-bg" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a href="index.html" class="site-logo">🍯 Ciclo de Produtação Digital</a>
+    <a href="index.html" class="site-logo">
+      <span class="logo-mark">⬡</span>
+      PDLC · Produtação Digital
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Menu">☰</button>
     <nav class="site-nav">
       <a href="guia-inicio.html">Começar</a>
       <a href="configuracao.html">Configurar</a>
       <a href="catalogo-skills.html">Skills</a>
       <a href="apresentacao-executiva.html">Executivo</a>
-      <a href="colmeia/00-nucleo/indice-colmeia.md">Colmeia (MD)</a>
+      <a href="https://github.com/rodrigomacia/pdlc_devin_cli" target="_blank" rel="noopener">GitHub</a>
+      <a href="guia-inicio.html" class="nav-cta">Iniciar →</a>
     </nav>
   </header>
 
   <main>
-    <div class="hero-block">
-      <h1>Produtação Digital com IA multi-agente</h1>
-      <p>
-        Framework completo para o Head de Produto conduzir iniciativas do OKR ao cliente em produção —
-        com portões de decisão, validação em três momentos e 46 skills no Devin CLI.
+    <section class="hero-landing">
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        Open source · Devin CLI · Go-to-Market ponta a ponta
+      </div>
+      <h1>
+        O futuro da<br />
+        <span class="gradient">produtação digital</span><br />
+        é orquestrado
+      </h1>
+      <p class="lead">
+        Um sistema multi-agente onde o Head de Produto decide, a IA executa com rigor
+        e cada entrega passa por validação real — antes de comprometer engenharia.
       </p>
+      <div class="hero-actions">
+        <a href="guia-inicio.html" class="btn btn-primary">Começar agora</a>
+        <a href="apresentacao-executiva.html" class="btn btn-ghost">Visão executiva</a>
+      </div>
+
+      <div class="stats-strip">
+        <div class="stat-item"><strong>5</strong><span>Etapas do ciclo</span></div>
+        <div class="stat-item"><strong>46</strong><span>Skills Devin</span></div>
+        <div class="stat-item"><strong>32</strong><span>Agentes IA</span></div>
+        <div class="stat-item"><strong>3</strong><span>Validações com cliente</span></div>
+      </div>
+    </section>
+
+    <section class="cycle-pipeline reveal">
+      <h2>O ciclo · colmeia operacional</h2>
+      <div class="pipeline-track">
+        <div class="pipeline-node">
+          <div class="node-dot" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">1</div>
+          <h4>Contexto</h4>
+          <p>OKR & estratégia</p>
+        </div>
+        <div class="pipeline-node">
+          <div class="node-dot" style="background:linear-gradient(135deg,#a78bfa,#6d28d9)">2</div>
+          <h4>Discovery</h4>
+          <p>3 visões + protótipo</p>
+        </div>
+        <div class="pipeline-node">
+          <div class="node-dot" style="background:linear-gradient(135deg,#fbbf24,#b45309)">3</div>
+          <h4>Experimentação</h4>
+          <p>Clientes reais</p>
+        </div>
+        <div class="pipeline-node">
+          <div class="node-dot" style="background:linear-gradient(135deg,#34d399,#047857)">4</div>
+          <h4>Construção</h4>
+          <p>SDD · CI/CD · canário</p>
+        </div>
+        <div class="pipeline-node">
+          <div class="node-dot" style="background:linear-gradient(135deg,#fb7185,#be123c)">5</div>
+          <h4>Operação</h4>
+          <p>Métricas & loop</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-head reveal">
+      <p class="label">Primeiros passos</p>
+      <h2>Explore a documentação</h2>
+      <p>Três portas de entrada — do setup técnico à narrativa para liderança.</p>
     </div>
 
-    <div class="grid grid-3">
-      <a href="guia-inicio.html" class="card" style="text-decoration:none;color:inherit">
-        <span class="tag tag-guide">Comece aqui</span>
+    <div class="bento reveal">
+      <a href="guia-inicio.html" class="card span-8">
+        <span class="tag tag-guide">Recomendado</span>
         <h3>Guia de início rápido</h3>
-        <p>Instale, configure e execute sua primeira iniciativa com <code>/orquestrar-producao</code>.</p>
+        <p>Setup em minutos, primeiro <code>/orquestrar-producao</code> e fluxo favo a favo com regras de ouro.</p>
+        <span class="arrow">→</span>
       </a>
-      <a href="configuracao.html" class="card" style="text-decoration:none;color:inherit">
-        <span class="tag tag-tech">Setup</span>
-        <h3>Configuração Devin CLI</h3>
-        <p>Script de setup, MCP, permissões e templates em <code>colmeia/_config/</code>.</p>
+      <a href="configuracao.html" class="card span-4">
+        <span class="tag tag-tech">Devin CLI</span>
+        <h3>Configuração</h3>
+        <p>MCP, permissões, scripts e templates <code>colmeia/_config</code>.</p>
+        <span class="arrow">→</span>
       </a>
-      <a href="apresentacao-executiva.html" class="card" style="text-decoration:none;color:inherit">
+      <a href="apresentacao-executiva.html" class="card span-4">
         <span class="tag tag-exec">Comitê</span>
         <h3>Apresentação executiva</h3>
-        <p>Visão para liderança — linguagem de negócio, sem jargão técnico.</p>
+        <p>Visão de produto inovador em linguagem de negócio.</p>
+        <span class="arrow">→</span>
+      </a>
+      <a href="fluxo-head-produto-devin.html" class="card span-4">
+        <span class="tag tag-tech">Fluxo</span>
+        <h3>Head × Devin</h3>
+        <p>Conversação, grill-me e portões em cada decisão.</p>
+        <span class="arrow">→</span>
+      </a>
+      <a href="fluxo-producao.html" class="card span-4">
+        <span class="tag tag-tech">Mapa</span>
+        <h3>Arquitetura técnica</h3>
+        <p>Skills, agentes, subagentes e integrações MCP.</p>
+        <span class="arrow">→</span>
       </a>
     </div>
 
-    <h2 class="section-title">Fluxos visuais</h2>
-    <div class="grid grid-2">
-      <a href="fluxo-head-produto-devin.html" class="card" style="text-decoration:none;color:inherit">
-        <h3>Head de Produto × Devin CLI</h3>
-        <p>Como o Head conversa com a IA em cada etapa, incluindo o revisor crítico (grill-me).</p>
-      </a>
-      <a href="fluxo-producao.html" class="card" style="text-decoration:none;color:inherit">
-        <h3>Mapa técnico completo</h3>
-        <p>Skills, agentes, subagentes e capacidades externas por favo do ciclo.</p>
-      </a>
+    <div class="section-head reveal">
+      <p class="label">Colmeia · 5 favos</p>
+      <h2>Contratos por etapa</h2>
+      <p>Fluxos, gates, artefatos e modelos — sem conteúdo de produto versionado.</p>
     </div>
 
-    <h2 class="section-title">O ciclo em 5 etapas</h2>
-    <div class="grid grid-3">
-      <div class="card">
+    <div class="favo-grid reveal">
+      <article class="favo-card">
         <span class="favo-pill f01">01</span>
         <h3>Contexto estratégico</h3>
-        <p>OKRs, metas e tese de produto alinhados à plataforma.</p>
-        <p style="margin-top:0.5rem"><a href="colmeia/01-contexto-estrategico/README.md">Documentação →</a></p>
-      </div>
-      <div class="card">
+        <p>Plataforma OKR, cascata e tese de produto.</p>
+        <a class="doc-link" href="colmeia/01-contexto-estrategico/README.md">Documentação →</a>
+      </article>
+      <article class="favo-card">
         <span class="favo-pill f02">02</span>
-        <h3>Descoberta</h3>
-        <p>Três visões, hipóteses, protótipo e feature candidata.</p>
-        <p style="margin-top:0.5rem"><a href="colmeia/02-discovery/README.md">Documentação →</a></p>
-      </div>
-      <div class="card">
+        <h3>Discovery GTM</h3>
+        <p>Três visões, SVM, Figma, feature candidata.</p>
+        <a class="doc-link" href="colmeia/02-discovery/README.md">Documentação →</a>
+      </article>
+      <article class="favo-card">
         <span class="favo-pill f03">03</span>
         <h3>Experimentação</h3>
-        <p>Teste com clientes reais — scale, iterate ou kill.</p>
-        <p style="margin-top:0.5rem"><a href="colmeia/03-experimentacao/README.md">Documentação →</a></p>
-      </div>
-      <div class="card">
+        <p>Evidência com clientes reais — scale ou pivot.</p>
+        <a class="doc-link" href="colmeia/03-experimentacao/README.md">Documentação →</a>
+      </article>
+      <article class="favo-card">
         <span class="favo-pill f04">04</span>
-        <h3>Construção</h3>
-        <p>Spec, código, review, CI/CD e rollout canário.</p>
-        <p style="margin-top:0.5rem"><a href="colmeia/04-construcao/README.md">Documentação →</a></p>
-      </div>
-      <div class="card">
+        <h3>Construção SDD</h3>
+        <p>Spec → review-pr → CI/CD → rollout canário.</p>
+        <a class="doc-link" href="colmeia/04-construcao/README.md">Documentação →</a>
+      </article>
+      <article class="favo-card">
         <span class="favo-pill f05">05</span>
-        <h3>Operação</h3>
-        <p>Métricas, incidentes (ERT) e loop para discovery.</p>
-        <p style="margin-top:0.5rem"><a href="colmeia/05-operacao/README.md">Documentação →</a></p>
-      </div>
-      <div class="card">
+        <h3>Operação + ERT</h3>
+        <p>Métricas, incidentes e loop para discovery.</p>
+        <a class="doc-link" href="colmeia/05-operacao/README.md">Documentação →</a>
+      </article>
+      <article class="favo-card">
         <span class="favo-pill f00">∅</span>
         <h3>Transversal</h3>
-        <p>Orquestração, handoffs, grill-me e governança.</p>
-        <p style="margin-top:0.5rem"><a href="colmeia/00-nucleo/ciclo-completo.md">Ciclo completo →</a></p>
-      </div>
+        <p>Orquestração, grill-me, handoffs.</p>
+        <a class="doc-link" href="colmeia/00-nucleo/ciclo-completo.md">Ciclo completo →</a>
+      </article>
     </div>
 
-    <h2 class="section-title">Referência rápida</h2>
-    <div class="grid grid-2">
+    <div class="section-head reveal">
+      <p class="label">Referência</p>
+      <h2>Núcleo & configuração</h2>
+    </div>
+
+    <div class="grid grid-2 reveal">
       <div class="card">
         <h3>Núcleo</h3>
-        <ul style="margin-top:0.5rem;padding-left:1.2rem;color:var(--muted);font-size:0.92rem">
-          <li><a href="colmeia/00-nucleo/catalogo-skills.md">Catálogo de skills</a></li>
-          <li><a href="colmeia/00-nucleo/ciclo-completo.md">Ciclo completo (diagrama)</a></li>
-          <li><a href="colmeia/00-nucleo/grill-me.md">Grill-me (revisor crítico)</a></li>
-          <li><a href="colmeia/00-nucleo/modelo-experimentacao-discovery.md">Validação 02/03/04</a></li>
-          <li><a href="AGENTS.md">AGENTS.md</a></li>
+        <ul style="margin-top:0.75rem;padding-left:1.1rem;color:var(--text-secondary);font-size:0.9rem;line-height:1.9">
+          <li><a href="catalogo-skills.html">Catálogo de skills (46)</a></li>
+          <li><a href="colmeia/00-nucleo/ciclo-completo.md">Diagrama do ciclo</a></li>
+          <li><a href="colmeia/00-nucleo/grill-me.md">Grill-me · revisor crítico</a></li>
+          <li><a href="colmeia/00-nucleo/modelo-experimentacao-discovery.md">Dupla validação 02/03/04</a></li>
         </ul>
       </div>
       <div class="card">
-        <h3>Configuração</h3>
-        <ul style="margin-top:0.5rem;padding-left:1.2rem;color:var(--muted);font-size:0.92rem">
+        <h3>Integrações</h3>
+        <ul style="margin-top:0.75rem;padding-left:1.1rem;color:var(--text-secondary);font-size:0.9rem;line-height:1.9">
           <li><a href="colmeia/_config/okr-plataforma.md">Plataforma OKR</a></li>
-          <li><a href="colmeia/_config/discovery-tools.md">Tools discovery (VOC, analytics)</a></li>
-          <li><a href="colmeia/_config/construcao-monorepo.md">Monorepo, CI/CD</a></li>
+          <li><a href="colmeia/_config/discovery-tools.md">VOC & analytics</a></li>
+          <li><a href="colmeia/_config/construcao-monorepo.md">Monorepo & CI/CD</a></li>
+          <li><a href="https://github.com/rodrigomacia/pdlc_devin_cli">Repositório GitHub</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="alert alert-info" style="margin-top:2rem">
-      <strong>GitHub Pages:</strong> esta documentação é publicada a partir da pasta <code>docs/</code>.
-      Execute <code>bash scripts/build-docs-site.sh</code> antes do push para incluir o espelho da colmeia.
-    </div>
+    <section class="cta-band reveal">
+      <h2>Pronto para a primeira iniciativa?</h2>
+      <p>Clone, configure e invoque <code>/orquestrar-producao {id}</code> no Devin CLI.</p>
+      <div class="hero-actions" style="margin-bottom:0">
+        <a href="https://github.com/rodrigomacia/pdlc_devin_cli" class="btn btn-primary" target="_blank" rel="noopener">Ver no GitHub</a>
+        <a href="guia-inicio.html" class="btn btn-ghost">Guia de início</a>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    Ciclo de Produtação Digital · Framework de skills Devin CLI · Documentação v1.0
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-brand">⬡ PDLC · Ciclo de Produtação Digital</span>
+      <div class="footer-links">
+        <a href="guia-inicio.html">Documentação</a>
+        <a href="catalogo-skills.html">Skills</a>
+        <a href="https://github.com/rodrigomacia/pdlc_devin_cli">GitHub</a>
+        <a href="https://cli.devin.ai" target="_blank" rel="noopener">Devin CLI</a>
+      </div>
+      <p class="footer-meta">Framework open source · MIT · Produto digital inovador</p>
+    </div>
   </footer>
 
+  <script src="assets/site.js"></script>
 </body>
 </html>

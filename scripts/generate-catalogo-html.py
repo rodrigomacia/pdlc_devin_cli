@@ -56,29 +56,33 @@ def main() -> None:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catálogo de Skills — Ciclo de Produtação Digital</title>
+  <meta name="theme-color" content="#06070d" />
+  <title>Catálogo de Skills — PDLC</title>
   <link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
+  <div class="hex-bg" aria-hidden="true"></div>
   <header class="site-header">
-    <a href="index.html" class="site-logo">🍯 Ciclo de Produtação Digital</a>
+    <a href="index.html" class="site-logo"><span class="logo-mark">⬡</span> PDLC</a>
+    <button class="nav-toggle" type="button" aria-label="Menu">☰</button>
     <nav class="site-nav">
       <a href="guia-inicio.html">Começar</a>
       <a href="configuracao.html">Configurar</a>
       <a href="catalogo-skills.html">Skills</a>
       <a href="apresentacao-executiva.html">Executivo</a>
+      <a href="https://github.com/rodrigomacia/pdlc_devin_cli" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </header>
   <main>
-    <p class="breadcrumb"><a href="index.html">Início</a> / Catálogo de skills</p>
-    <h1 style="font-size:1.85rem;margin-bottom:0.5rem">Catálogo de skills ({len(skills)})</h1>
-    <p style="color:var(--muted);margin-bottom:2rem">
-      Gerado de <code>.devin/skills/</code>.
-      Matriz gates: <a href="colmeia/00-nucleo/catalogo-skills.md">catalogo-skills.md</a>.
-    </p>
+    <p class="breadcrumb"><a href="index.html">Início</a> / Skills</p>
+    <div class="page-hero">
+      <h1>Catálogo de skills ({len(skills)})</h1>
+      <p>Gerado de <code>.devin/skills/</code> · Matriz gates em <a href="colmeia/00-nucleo/catalogo-skills.md">catalogo-skills.md</a></p>
+    </div>
 {body}
   </main>
-  <footer><a href="index.html">← Voltar ao início</a></footer>
+  <footer class="site-footer"><div class="footer-inner"><a href="index.html" class="footer-brand">← Início</a></div></footer>
+  <script src="assets/site.js"></script>
 </body>
 </html>
 """
